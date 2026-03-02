@@ -31,7 +31,7 @@ const App = () => {
     return (
         <>
             <header className="py-3 px-1 bg-emerald-800 text-white mb-3">
-                <h1>Truck Condition</h1>
+                <h1 className="text-xl font-bold">Truck Condition</h1>
             </header>
             <ul className="flex items-center justify-center gap-3 flex-wrap">
                 {trucks.length > 0 &&

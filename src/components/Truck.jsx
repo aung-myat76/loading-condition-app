@@ -31,9 +31,21 @@ const Truck = ({ id, loadingBill, condition, updataCondition }) => {
                 id="state"
                 className="border-1 my-2 border-stone-800 py-1 rounded-md"
                 defaultValue={condition}>
-                <option value="Free">Free</option>
-                <option value="Almost">Almost</option>
-                <option value="Parked">Parked</option>
+                <option
+                    className="bg-stone-800 text-white hover:bg-stone-500"
+                    value="Free">
+                    Free
+                </option>
+                <option
+                    className="bg-stone-800 text-white hover:bg-stone-500"
+                    value="Almost">
+                    Almost
+                </option>
+                <option
+                    className="bg-stone-800 text-white hover:bg-stone-500"
+                    value="Parked">
+                    Parked
+                </option>
             </select>
             <button
                 className=" p-1 bg-stone-800 rounded-md"
