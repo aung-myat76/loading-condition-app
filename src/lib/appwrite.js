@@ -6,5 +6,7 @@ const client = new Client()
 
 const account = new Account(client);
 const databases = new Databases(client);
+const dbId = "69a518ad0022b52d1d78";
+const collectionId = "truck-condition";
 
-export { client, account, databases };
+export { client, account, databases, dbId, collectionId };
