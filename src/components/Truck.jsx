@@ -1,18 +1,31 @@
 import { useRef } from "react";
 import cn from "../lib/cn";
+import { useState } from "react";
+
+const getTime = () => {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+    });
+    return timeString;
+};
 
 const Truck = ({ id, loadingBill, condition, updataCondition }) => {
     const conditionRef = useRef(null);
+    const [time, setTime] = useState(getTime());
 
     const handleUpdateState = async () => {
         const state = conditionRef.current.value;
         if (state) {
             await updataCondition(id, { condition: state });
+            setTime(getTime());
         }
     };
 
     const liCls = cn(
-        "flex flex-col p-5 text-white rounded-md w-27 text-center",
+        "flex flex-col p-3 text-white rounded-md w-27 text-center",
         condition === "Free"
             ? "bg-emerald-600"
             : condition === "Almost"
@@ -47,6 +60,7 @@ const Truck = ({ id, loadingBill, condition, updataCondition }) => {
                     Parked
                 </option>
             </select>
+            <p className="my-1">at - {time}</p>
             <button
                 className=" p-1 bg-stone-800 rounded-md"
                 onClick={handleUpdateState}>
