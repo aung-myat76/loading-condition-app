@@ -5,6 +5,7 @@ import "./App.css";
 
 const App = () => {
     const [trucks, setTrucks] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const updataCondition = useCallback(async (id, newState) => {
         setTrucks((preTrucks) => {
@@ -21,32 +22,68 @@ const App = () => {
 
     useEffect(() => {
         const getData = async () => {
+            setLoading(true);
             const data = await databases.listDocuments(dbId, collectionId);
             console.log(data.documents);
             setTrucks(data.documents);
         };
         getData();
+        setLoading(false);
     }, []);
+
+    const handleReset = async () => {
+        if (!confirm("Are u sure to Reset?")) {
+            return;
+        }
+        setLoading(true);
+        const data = await databases.listDocuments(dbId, collectionId);
+        const allPromises = data.documents.map((truck) => {
+            databases.updateDocument(dbId, collectionId, truck.$id, {
+                condition: "Free"
+            });
+        });
+        await Promise.all(allPromises);
+        setTrucks((preTrucks) => {
+            const updatedTrucks = [...preTrucks];
+            updatedTrucks.map((t) => (t.condition = "Free"));
+            return updatedTrucks;
+        });
+        setLoading(false);
+    };
 
     return (
         <>
-            <header className="py-3 px-1 bg-emerald-800 text-white mb-3">
-                <h1 className="text-xl font-bold">Truck Condition</h1>
-            </header>
-            <ul className="flex items-center justify-center gap-3 flex-wrap">
-                {trucks.length > 0 &&
-                    trucks.map((truck) => {
-                        return (
-                            <Truck
-                                key={truck.$id}
-                                id={truck.$id}
-                                loadingBill={truck["loading-bill"]}
-                                condition={truck["condition"]}
-                                updataCondition={updataCondition}
-                            />
-                        );
-                    })}
-            </ul>
+            <div>
+                <header className="flex items-center justify-between py-3 px-1 bg-emerald-800 text-white mb-5">
+                    <h1 className="text-xl font-bold">Truck Condition</h1>
+                    <button
+                        onClick={handleReset}
+                        className="bg-red-600 p-2 rounded-md text-white">
+                        Reset
+                    </button>
+                </header>
+                {loading && (
+                    <p className="text-xl text-center my-10 font-bold">
+                        Loading...
+                    </p>
+                )}
+                {!loading && (
+                    <ul className="flex items-center justify-center gap-3 flex-wrap">
+                        {trucks.length > 0 &&
+                            trucks.map((truck) => {
+                                return (
+                                    <Truck
+                                        key={truck.$id}
+                                        id={truck.$id}
+                                        loadingBill={truck["loading-bill"]}
+                                        condition={truck["condition"]}
+                                        updataCondition={updataCondition}
+                                    />
+                                );
+                            })}
+                    </ul>
+                )}
+            </div>
         </>
     );
 };
