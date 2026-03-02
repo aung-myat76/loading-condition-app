@@ -6,6 +6,7 @@ import "./App.css";
 const App = () => {
     const [trucks, setTrucks] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [isEditting, setIsEditting] = useState(false);
 
     const updataCondition = useCallback(async (id, newState) => {
         setTrucks((preTrucks) => {
@@ -51,16 +52,27 @@ const App = () => {
         setLoading(false);
     };
 
+    const handleEdit = () => {
+        setIsEditting((preState) => !preState);
+    };
+
     return (
         <>
             <div>
                 <header className="flex items-center justify-between py-3 px-1 bg-emerald-800 text-white mb-5">
                     <h1 className="text-xl font-bold">Truck Condition</h1>
-                    <button
-                        onClick={handleReset}
-                        className="bg-red-600 p-2 rounded-md text-white">
-                        Reset
-                    </button>
+                    <div>
+                        <button
+                            onClick={handleEdit}
+                            className="bg-blue-600 mx-2 p-2 rounded-md text-white">
+                            {isEditting ? "Done" : "Edit"}
+                        </button>
+                        <button
+                            onClick={handleReset}
+                            className="bg-red-600 p-2 rounded-md text-white">
+                            Reset
+                        </button>
+                    </div>
                 </header>
                 {loading && (
                     <p className="text-xl text-center my-10 font-bold">
@@ -78,6 +90,7 @@ const App = () => {
                                         loadingBill={truck["loading-bill"]}
                                         condition={truck["condition"]}
                                         updataCondition={updataCondition}
+                                        isEditting={isEditting}
                                     />
                                 );
                             })}
