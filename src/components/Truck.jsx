@@ -12,7 +12,7 @@ const Truck = ({ id, loadingBill, condition, updataCondition, isEditting }) => {
     };
 
     const liCls = cn(
-        "flex flex-col py-5  px-3 text-white rounded-md w-20 text-center",
+        "flex flex-col py-5  px-3 text-white rounded-md w-27 text-center",
         condition === "Free"
             ? "bg-emerald-600"
             : condition === "Almost"
