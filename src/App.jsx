@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { collectionId, databases, dbId } from "./lib/appwrite";
+import { collectionId, databases, client, dbId } from "./lib/appwrite";
 import Truck from "./components/Truck";
 import "./App.css";
 
@@ -23,13 +23,32 @@ const App = () => {
 
     useEffect(() => {
         const getData = async () => {
-            setLoading(true);
             const data = await databases.listDocuments(dbId, collectionId);
             console.log(data.documents);
             setTrucks(data.documents);
         };
         getData();
-        setLoading(false);
+
+        const unsubscribe = client.subscribe(
+            `databases.${dbId}.collections.${collectionId}.documents`,
+            (response) => {
+                if (
+                    response.events.includes(
+                        "databases.*.collections.*.documents.*.update"
+                    )
+                ) {
+                    setTrucks((prev) =>
+                        prev.map((t) =>
+                            t.$id === response.payload.$id
+                                ? response.payload
+                                : t
+                        )
+                    );
+                }
+            }
+        );
+
+        return () => unsubscribe();
     }, []);
 
     const handleReset = async () => {

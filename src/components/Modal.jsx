@@ -12,11 +12,12 @@ const Modal = ({ bill, isOpen, onClose, cb }) => {
     return ReactDom.createPortal(
         <div
             className="fixed flex items-center justify-center inset-0 bg-stone-100/50 size-screen z-50"
-            onClick={(e) => {
-                e.stopPropagation();
+            onClick={() => {
                 onClose();
             }}>
-            <div className="bg-stone-900 w-50 rounded-md p-5 text-white">
+            <div
+                className="bg-stone-900 w-50 rounded-md p-5 text-white"
+                onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between">
                     <h1 className="font-bold text-xl ">{bill}</h1>
                     <button className=" bg-red-600 px-3 py-1 text-white rounded-sm">
