@@ -16,8 +16,8 @@ const Truck = ({ id, loadingBill, condition, updataCondition, isEditting }) => {
         condition === "Free"
             ? "bg-emerald-600"
             : condition === "Almost"
-              ? "bg-yellow-600"
-              : "bg-red-600"
+              ? "bg-yellow-600" 
+              : condition === "Block" ? "bg-stone-200" : "bg-red-600"
     );
 
     return (
@@ -47,6 +47,11 @@ const Truck = ({ id, loadingBill, condition, updataCondition, isEditting }) => {
                             className="bg-stone-800 text-white hover:bg-stone-500"
                             value="Loading">
                             Loading
+                        </option>
+                        <option
+                            className="bg-stone-800 text-white hover:bg-stone-500"
+                            value="Block">
+                            Block
                         </option>
                     </select>
                     <button
