@@ -17,7 +17,7 @@ const Truck = ({ id, loadingBill, condition, updataCondition, isEditting }) => {
             ? "bg-emerald-600"
             : condition === "Almost"
               ? "bg-yellow-600" 
-              : condition === "Block" ? "bg-stone-200" : "bg-red-600"
+              : condition === "Block" ? "bg-stone-400" : "bg-red-600"
     );
 
     return (
