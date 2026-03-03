@@ -20,7 +20,9 @@ const Modal = ({ bill, isOpen, onClose, cb }) => {
                 onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between">
                     <h1 className="font-bold text-xl ">{bill}</h1>
-                    <button className=" bg-red-600 px-3 py-1 text-white rounded-sm">
+                    <button
+                        onClick={onClose}
+                        className=" bg-red-600 px-3 py-1 text-white rounded-sm">
                         x
                     </button>
                 </div>
