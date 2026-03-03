@@ -45,8 +45,8 @@ const Truck = ({ id, loadingBill, condition, updataCondition, isEditting }) => {
                         </option>
                         <option
                             className="bg-stone-800 text-white hover:bg-stone-500"
-                            value="Parked">
-                            Parked
+                            value="Loading">
+                            Loading
                         </option>
                     </select>
                     <button
