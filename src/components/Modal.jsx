@@ -1,11 +1,28 @@
 import ReactDom from "react-dom";
 import cn from "../lib/cn";
+import { useRef } from "react";
+import { collectionId, databases, dbId } from "../lib/appwrite";
 
-const Modal = ({ bill, isOpen, onClose, cb }) => {
+const Modal = ({ id, truck, bill, isOpen, onClose, cb }) => {
     if (!isOpen) return null;
+
+    const truckRef = useRef(null);
 
     const handleSelect = async (state) => {
         await cb(state);
+        onClose();
+    };
+
+    const handleUpdateTruck = async () => {
+        let truckNo = "Truck";
+
+        if (truckRef.current) {
+            truckNo = truckRef.current.value;
+        }
+
+        await databases.updateDocument(dbId, collectionId, id, {
+            truck: truckNo
+        });
         onClose();
     };
 
@@ -26,7 +43,19 @@ const Modal = ({ bill, isOpen, onClose, cb }) => {
                         x
                     </button>
                 </div>
-                <ul>
+                <ul className="my-2">
+                    <li className="flex justify-between">
+                        <input
+                            defaultValue={truck ? truck : ""}
+                            ref={truckRef}
+                            className="w-20 p-2 mr-2 border-b-2  font-bold border-white focus:outline-none"
+                        />
+                        <button
+                            className="p-2 font-bold bg-blue-600 rounded-sm"
+                            onClick={handleUpdateTruck}>
+                            Update
+                        </button>
+                    </li>
                     <li>
                         <button
                             className="p-2 my-2 rounded-sm w-full block font-bold bg-emerald-600"

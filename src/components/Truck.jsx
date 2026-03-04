@@ -2,13 +2,17 @@ import { useRef, useState } from "react";
 import cn from "../lib/cn";
 import Modal from "./Modal";
 
-const Truck = ({ id, loadingBill, condition, updateCondition }) => {
+const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
     const conditionRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [editTruck, setEditTruck] = useState(false);
 
     const handleUpdateState = async (state) => {
         // const state = conditionRef.current.value;
         if (state) {
+            if (state === "Free") {
+                await updateCondition(id, { truck: null });
+            }
             await updateCondition(id, { condition: state });
         }
     };
@@ -22,7 +26,7 @@ const Truck = ({ id, loadingBill, condition, updateCondition }) => {
     };
 
     const liCls = cn(
-        "flex flex-col py-5  px-3 text-white rounded-md w-27 text-center",
+        "flex flex-col   px-3 text-white rounded-md w-27 min-h-23 it",
         condition === "Free"
             ? "bg-emerald-600"
             : condition === "Almost"
@@ -36,13 +40,28 @@ const Truck = ({ id, loadingBill, condition, updateCondition }) => {
         <>
             <Modal
                 bill={loadingBill}
+                id={id}
                 isOpen={isOpen}
                 onClose={onClose}
                 cb={handleUpdateState}
+                truck={truck}
             />
             <li className={liCls} onClick={onOpen}>
                 <h2 className="text-xl font-bold">{loadingBill}</h2>
-                <p className="my-1 font-bold">{condition}</p>
+                {editTruck && (
+                    <div>
+                        <input /> <button>Update</button>
+                    </div>
+                )}
+                {!editTruck && (
+                    <p className="text-center py-2 font-bold">
+                        {condition === "Free"
+                            ? "-"
+                            : (truck + "").toUpperCase()}{" "}
+                    </p>
+                )}
+                {/* <p className="my-1 font-bold">{condition}</p> */}
+
                 {/* {!isEditting && <p className="my-2 font-bold">{condition}</p>}
                 {isEditting && (
                     <>
