@@ -6,7 +6,7 @@ const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
     // const conditionRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
     const [editTruck, setEditTruck] = useState(false);
-
+    console.log(condition);
     const handleUpdateState = async (state) => {
         // const state = conditionRef.current.value;
         if (state) {
