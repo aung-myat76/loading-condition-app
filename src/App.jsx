@@ -104,7 +104,7 @@ const App = () => {
     //     setIsEditting((preState) => !preState);
     // };
 
-    const stateChangeCls = cn("p-2 rounded-md");
+    const stateChangeCls = cn("p-2 rounded-md text-[12px]");
 
     return (
         <>
@@ -124,7 +124,7 @@ const App = () => {
                     {/* <p className=" font-bold mx-3">{getShift()}</p> */}
                     <p className=" font-bold mx-3">{nowDate}</p>
                 </div>
-                <ul className="flex gap-3 items-center justify-center my-3 text-white">
+                <ul className="flex gap-2 items-center justify-center my-3 text-sm text-white">
                     <li>
                         <button
                             onClick={() => setState("All")}
@@ -132,10 +132,10 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "All"
-                                    ? "bg-stone-600 border-3 border-stone-300"
-                                    : "bg-stone-600/75")
+                                    ? "bg-blue-600 border-3 border-stone-300"
+                                    : "bg-blue-600/75")
                             }>
-                            All : {trucks.length}
+                            All [{trucks.length}]
                         </button>
                     </li>
                     <li>
@@ -148,8 +148,9 @@ const App = () => {
                                     ? "bg-emerald-600 border-3 border-stone-300"
                                     : "bg-emerald-600/75")
                             }>
-                            Free :{" "}
+                            Free [
                             {trucks.filter((t) => t.condition == "Free").length}
+                            ]
                         </button>
                     </li>
                     <li>
@@ -162,11 +163,12 @@ const App = () => {
                                     ? "bg-yellow-600 border-3 border-stone-300"
                                     : "bg-yellow-600/75")
                             }>
-                            Almost :{" "}
+                            Almost [
                             {
                                 trucks.filter((t) => t.condition == "Almost")
                                     .length
                             }
+                            ]
                         </button>
                     </li>
                     <li>
@@ -179,11 +181,30 @@ const App = () => {
                                     ? "bg-red-600 border-3 border-stone-300"
                                     : "bg-red-600/75")
                             }>
-                            Loading :{" "}
+                            Loading [
                             {
                                 trucks.filter((t) => t.condition == "Loading")
                                     .length
                             }
+                            ]
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            onClick={() => setState("Blocked")}
+                            className={
+                                stateChangeCls +
+                                " " +
+                                (state === "Blocked"
+                                    ? "bg-stone-600 border-3 border-stone-300"
+                                    : "bg-stone-600/75")
+                            }>
+                            Blocked [
+                            {
+                                trucks.filter((t) => t.condition == "Blocked")
+                                    .length
+                            }
+                            ]
                         </button>
                     </li>
                 </ul>
