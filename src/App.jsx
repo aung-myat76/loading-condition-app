@@ -132,7 +132,7 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "All"
-                                    ? "bg-stone-600 border-3 border-stone-900"
+                                    ? "bg-stone-600 border-3 border-stone-100"
                                     : "bg-stone-600/75")
                             }>
                             All : {trucks.length}
@@ -145,7 +145,7 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Free"
-                                    ? "bg-emerald-600 border-3 border-stone-900"
+                                    ? "bg-emerald-600 border-3 border-stone-100"
                                     : "bg-emerald-600/75")
                             }>
                             Free :{" "}
@@ -159,7 +159,7 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Almost"
-                                    ? "bg-yellow-600 border-3 border-stone-900"
+                                    ? "bg-yellow-600 border-3 border-stone-100"
                                     : "bg-yellow-600/75")
                             }>
                             Almost :{" "}
@@ -176,7 +176,7 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Loading"
-                                    ? "bg-red-600 border-3 border-stone-900"
+                                    ? "bg-red-600 border-3 border-stone-100"
                                     : "bg-red-600/75")
                             }>
                             Loading :{" "}
