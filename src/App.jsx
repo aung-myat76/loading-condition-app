@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { collectionId, databases, client, dbId } from "./lib/appwrite";
-import Truck from "./components/Truck";
+// import Truck from "./components/Truck";
 import "./App.css";
+import TruckList from "./components/TruckList";
+import cn from "./lib/cn";
 
 const now = new Date();
 const nowDate = now.toLocaleDateString("en-GB");
@@ -19,16 +21,16 @@ const nowDate = now.toLocaleDateString("en-GB");
 const App = () => {
     const [trucks, setTrucks] = useState([]);
     const [loading, setLoading] = useState(false);
-    // const [state, setState] = useState("All");
-    const [filterTrucks, setFilterTrucks] = useState([]);
+    const [state, setState] = useState("All");
+    // const [filterTrucks, setFilterTrucks] = useState([]);
     // const [isEditting, setIsEditting] = useState(false);
 
-    const handleFilter = (state) => {
-        if (state === "All") {
-            return setFilterTrucks(trucks);
-        }
-        return setFilterTrucks(trucks.filter((t) => t.condition === state));
-    };
+    // const handleFilter = (state) => {
+    //     if (state === "All") {
+    //         return setFilterTrucks(trucks);
+    //     }
+    //     return setFilterTrucks(trucks.filter((t) => t.condition === state));
+    // };
 
     const updateCondition = useCallback(async (id, newState) => {
         setTrucks((preTrucks) => {
@@ -49,7 +51,7 @@ const App = () => {
             const data = await databases.listDocuments(dbId, collectionId);
             console.log(data.documents);
             setTrucks(data.documents);
-            setFilterTrucks(data.documents);
+            // setFilterTrucks(data.documents);
         };
         getData();
 
@@ -83,13 +85,16 @@ const App = () => {
         const data = await databases.listDocuments(dbId, collectionId);
         const allPromises = data.documents.map((truck) => {
             databases.updateDocument(dbId, collectionId, truck.$id, {
-                condition: "Free"
+                condition: "Free",
+                truck: null
             });
         });
         await Promise.all(allPromises);
         setTrucks((preTrucks) => {
             const updatedTrucks = [...preTrucks];
-            updatedTrucks.map((t) => (t.condition = "Free"));
+            updatedTrucks.map((t) => {
+                (t.condition = "Free"), (t.truck = null);
+            });
             return updatedTrucks;
         });
         setLoading(false);
@@ -99,6 +104,8 @@ const App = () => {
     //     setIsEditting((preState) => !preState);
     // };
 
+    const stateChangeCls = cn("p-2 rounded-md");
+
     return (
         <>
             <div>
@@ -106,11 +113,6 @@ const App = () => {
                     <h1 className="text-lg font-bold">Loading Condition</h1>
 
                     <div>
-                        {/* <button
-                            onClick={handleEdit}
-                            className="bg-blue-600 mx-2 p-2 rounded-md text-white">
-                            {isEditting ? "Done" : "Edit"}
-                        </button> */}
                         <button
                             onClick={handleReset}
                             className="bg-red-600 p-2 rounded-md text-white">
@@ -125,23 +127,41 @@ const App = () => {
                 <ul className="flex gap-3 items-center justify-center my-3 text-white">
                     <li>
                         <button
-                            onClick={() => handleFilter("All")}
-                            className="p-2 bg-stone-900 rounded-md">
+                            onClick={() => setState("All")}
+                            className={
+                                stateChangeCls +
+                                " " +
+                                (state === "All"
+                                    ? "bg-stone-600 border-3 border-stone-900"
+                                    : "bg-stone-600/75")
+                            }>
                             All : {trucks.length}
                         </button>
                     </li>
                     <li>
                         <button
-                            onClick={() => handleFilter("Free")}
-                            className="p-2 bg-emerald-600 rounded-md">
+                            onClick={() => setState("Free")}
+                            className={
+                                stateChangeCls +
+                                " " +
+                                (state === "Free"
+                                    ? "bg-emerald-600 border-3 border-stone-900"
+                                    : "bg-emerald-600/75")
+                            }>
                             Free :{" "}
                             {trucks.filter((t) => t.condition == "Free").length}
                         </button>
                     </li>
                     <li>
                         <button
-                            onClick={() => handleFilter("Almost")}
-                            className="p-2 bg-yellow-600 rounded-md">
+                            onClick={() => setState("Almost")}
+                            className={
+                                stateChangeCls +
+                                " " +
+                                (state === "Almost"
+                                    ? "bg-yellow-600 border-3 border-stone-900"
+                                    : "bg-yellow-600/75")
+                            }>
                             Almost :{" "}
                             {
                                 trucks.filter((t) => t.condition == "Almost")
@@ -151,8 +171,14 @@ const App = () => {
                     </li>
                     <li>
                         <button
-                            onClick={() => handleFilter("Loading")}
-                            className="p-2 bg-red-600 rounded-md">
+                            onClick={() => setState("Loading")}
+                            className={
+                                stateChangeCls +
+                                " " +
+                                (state === "Loading"
+                                    ? "bg-red-600 border-3 border-stone-900"
+                                    : "bg-red-600/75")
+                            }>
                             Loading :{" "}
                             {
                                 trucks.filter((t) => t.condition == "Loading")
@@ -167,23 +193,12 @@ const App = () => {
                         Loading...
                     </p>
                 )}
-                {!loading && (
-                    <ul className="flex items-center justify-center gap-3 flex-wrap md:w-2/4 mx-auto">
-                        {filterTrucks.length > 0 &&
-                            filterTrucks.map((truck) => {
-                                return (
-                                    <Truck
-                                        key={truck.$id}
-                                        id={truck.$id}
-                                        loadingBill={truck["loading-bill"]}
-                                        condition={truck["condition"]}
-                                        truck={truck["truck"]}
-                                        updateCondition={updateCondition}
-                                        // isEditting={isEditting}
-                                    />
-                                );
-                            })}
-                    </ul>
+                {!loading && trucks.length > 0 && (
+                    <TruckList
+                        trucks={trucks}
+                        state={state}
+                        updateCondition={updateCondition}
+                    />
                 )}
             </div>
         </>

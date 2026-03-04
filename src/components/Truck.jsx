@@ -3,7 +3,7 @@ import cn from "../lib/cn";
 import Modal from "./Modal";
 
 const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
-    const conditionRef = useRef(null);
+    // const conditionRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
     const [editTruck, setEditTruck] = useState(false);
 
@@ -48,7 +48,10 @@ const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
             />
             <li className={liCls} onClick={onOpen}>
                 <h2 className="text-xl font-bold">{loadingBill}</h2>
-                {editTruck && (
+                <p className="text-center my-2 font-bold">
+                    {truck ? String(truck).toUpperCase() : "-"}
+                </p>
+                {/* {editTruck && (
                     <div>
                         <input /> <button>Update</button>
                     </div>
@@ -59,7 +62,7 @@ const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
                             ? "-"
                             : (truck + "").toUpperCase()}{" "}
                     </p>
-                )}
+                )} */}
                 {/* <p className="my-1 font-bold">{condition}</p> */}
 
                 {/* {!isEditting && <p className="my-2 font-bold">{condition}</p>}

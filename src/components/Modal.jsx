@@ -14,14 +14,8 @@ const Modal = ({ id, truck, bill, isOpen, onClose, cb }) => {
     };
 
     const handleUpdateTruck = async () => {
-        let truckNo = "Truck";
-
-        if (truckRef.current) {
-            truckNo = truckRef.current.value;
-        }
-
         await databases.updateDocument(dbId, collectionId, id, {
-            truck: truckNo
+            truck: truckRef.current.value || "-"
         });
         onClose();
     };
@@ -33,22 +27,22 @@ const Modal = ({ id, truck, bill, isOpen, onClose, cb }) => {
                 onClose();
             }}>
             <div
-                className="bg-stone-900 w-50 rounded-md p-5 text-white"
+                className="bg-stone-900 w-75 rounded-md p-5 text-white"
                 onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between">
                     <h1 className="font-bold text-xl ">{bill}</h1>
                     <button
                         onClick={onClose}
-                        className=" bg-red-600 px-3 py-1 text-white rounded-sm">
+                        className=" bg-red-600 px-3 py-1 text-lg text-white rounded-sm">
                         x
                     </button>
                 </div>
                 <ul className="my-2">
-                    <li className="flex justify-between">
+                    <li className="flex justify-between my-5">
                         <input
-                            defaultValue={truck ? truck : ""}
                             ref={truckRef}
-                            className="w-20 p-2 mr-2 border-b-2  font-bold border-white focus:outline-none"
+                            placeholder="Truck no"
+                            className="w-45 p-2 text-center mr-2 border-b-2 text-lg font-bold border-white focus:outline-none"
                         />
                         <button
                             className="p-2 font-bold bg-blue-600 rounded-sm"
