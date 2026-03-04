@@ -104,7 +104,7 @@ const App = () => {
     //     setIsEditting((preState) => !preState);
     // };
 
-    const stateChangeCls = cn("p-2 rounded-md text-[18px]");
+    const stateChangeCls = cn("p-2 rounded-md text-[14px] font-bold");
 
     return (
         <>
