@@ -20,6 +20,8 @@ const ConfirmModal = ({ isOpen, onClose, cb }) => {
 
     const handleConfirm = async () => {
         if (!validForm) {
+            setIsFirstTime(false);
+            setIsTouched(true);
             return;
         } else {
             await cb();
