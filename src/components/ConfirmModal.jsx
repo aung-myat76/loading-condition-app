@@ -19,7 +19,7 @@ const ConfirmModal = ({ isOpen, onClose, cb }) => {
     if (!isOpen) return null;
 
     const handleConfirm = async () => {
-        if (!validForm && !isFirstTime) {
+        if (validForm && !isFirstTime) {
             return;
         } else {
             await cb();
