@@ -22,15 +22,6 @@ const App = () => {
     const [trucks, setTrucks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [state, setState] = useState("All");
-    // const [filterTrucks, setFilterTrucks] = useState([]);
-    // const [isEditting, setIsEditting] = useState(false);
-
-    // const handleFilter = (state) => {
-    //     if (state === "All") {
-    //         return setFilterTrucks(trucks);
-    //     }
-    //     return setFilterTrucks(trucks.filter((t) => t.condition === state));
-    // };
 
     const updateCondition = useCallback(async (id, newState) => {
         setTrucks((preTrucks) => {
@@ -99,10 +90,6 @@ const App = () => {
         });
         setLoading(false);
     };
-
-    // const handleEdit = () => {
-    //     setIsEditting((preState) => !preState);
-    // };
 
     const stateChangeCls = cn("p-2 rounded-md text-[14px] font-bold");
 

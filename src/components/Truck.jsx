@@ -3,12 +3,10 @@ import cn from "../lib/cn";
 import Modal from "./Modal";
 
 const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
-    // const conditionRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
     const [editTruck, setEditTruck] = useState(false);
     console.log(condition);
     const handleUpdateState = async (state) => {
-        // const state = conditionRef.current.value;
         if (state) {
             if (state === "Free") {
                 await updateCondition(id, { truck: null });
@@ -51,57 +49,6 @@ const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
                 <p className="text-center my-2 font-bold">
                     {truck ? String(truck).toUpperCase() : "-"}
                 </p>
-                {/* {editTruck && (
-                    <div>
-                        <input /> <button>Update</button>
-                    </div>
-                )}
-                {!editTruck && (
-                    <p className="text-center py-2 font-bold">
-                        {condition === "Free"
-                            ? "-"
-                            : (truck + "").toUpperCase()}{" "}
-                    </p>
-                )} */}
-                {/* <p className="my-1 font-bold">{condition}</p> */}
-
-                {/* {!isEditting && <p className="my-2 font-bold">{condition}</p>}
-                {isEditting && (
-                    <>
-                        <select
-                            ref={conditionRef}
-                            name="state"
-                            id="state"
-                            className="border-1 my-2 border-stone-800 py-1 rounded-md"
-                            defaultValue={condition}>
-                            <option
-                                className="bg-stone-800 text-white hover:bg-stone-500"
-                                value="Free">
-                                Free
-                            </option>
-                            <option
-                                className="bg-stone-800 text-white hover:bg-stone-500"
-                                value="Almost">
-                                Almost
-                            </option>
-                            <option
-                                className="bg-stone-800 text-white hover:bg-stone-500"
-                                value="Loading">
-                                Loading
-                            </option>
-                            <option
-                                className="bg-stone-800 text-white hover:bg-stone-500"
-                                value="Block">
-                                Block
-                            </option>
-                        </select>
-                        <button
-                            className=" p-1 bg-stone-800 rounded-md"
-                            onClick={handleUpdateState}>
-                            Update
-                        </button>
-                    </>
-                )} */}
             </li>
         </>
     );
