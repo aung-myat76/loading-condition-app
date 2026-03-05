@@ -1,11 +1,10 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import cn from "../lib/cn";
 import Modal from "./Modal";
 
 const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [editTruck, setEditTruck] = useState(false);
-    console.log(condition);
+
     const handleUpdateState = async (state) => {
         if (state) {
             if (state === "Free") {

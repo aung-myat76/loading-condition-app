@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
 import Truck from "./Truck";
 
 const TruckList = ({ trucks, state, updateCondition }) => {
     const filterTrucks =
         state === "All" ? trucks : trucks.filter((t) => t.condition === state);
-    console.log(state, filterTrucks);
 
     return (
         <ul className="flex items-center justify-center gap-3 flex-wrap md:w-2/4 mx-auto">

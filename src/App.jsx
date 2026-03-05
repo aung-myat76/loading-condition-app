@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { collectionId, databases, client, dbId } from "./lib/appwrite";
-// import Truck from "./components/Truck";
 import "./App.css";
 import TruckList from "./components/TruckList";
 import cn from "./lib/cn";
+import ConfirmModal from "./components/ConfirmModal";
 
 const now = new Date();
 const nowDate = now.toLocaleDateString("en-GB");
@@ -22,6 +22,10 @@ const App = () => {
     const [trucks, setTrucks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [state, setState] = useState("All");
+    const [isOpen, setIsOpen] = useState(false);
+
+    const onOpen = () => setIsOpen(true);
+    const onClose = () => setIsOpen(false);
 
     const updateCondition = useCallback(async (id, newState) => {
         setTrucks((preTrucks) => {
@@ -69,9 +73,6 @@ const App = () => {
     }, []);
 
     const handleReset = async () => {
-        if (!confirm("Are u sure to Reset?")) {
-            return;
-        }
         setLoading(true);
         const data = await databases.listDocuments(dbId, collectionId);
         const allPromises = data.documents.map((truck) => {
@@ -95,13 +96,14 @@ const App = () => {
 
     return (
         <>
+            <ConfirmModal isOpen={isOpen} onClose={onClose} cb={handleReset} />
             <div>
                 <header className="flex items-center justify-between py-3 px-1 bg-emerald-800 text-white mb-5">
                     <h1 className="text-lg font-bold">Loading Condition</h1>
 
                     <div>
                         <button
-                            onClick={handleReset}
+                            onClick={onOpen}
                             className="bg-red-600 p-2 rounded-md text-white">
                             Reset
                         </button>

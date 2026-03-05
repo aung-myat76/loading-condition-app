@@ -1,12 +1,10 @@
 import ReactDom from "react-dom";
-import cn from "../lib/cn";
 import { useRef } from "react";
 import { collectionId, databases, dbId } from "../lib/appwrite";
 
 const Modal = ({ id, truck, bill, isOpen, onClose, cb }) => {
-    if (!isOpen) return null;
-
     const truckRef = useRef(null);
+    if (!isOpen) return null;
 
     const handleSelect = async (state) => {
         await cb(state);
@@ -33,19 +31,21 @@ const Modal = ({ id, truck, bill, isOpen, onClose, cb }) => {
                     <h1 className="font-bold text-xl ">{bill}</h1>
                     <button
                         onClick={onClose}
-                        className=" bg-red-600 px-3 py-1 text-lg text-white rounded-sm">
-                        x
+                        className=" bg-stone-600 px-3 py-1 text-lg text-white rounded-sm">
+                        &#10006;
                     </button>
                 </div>
                 <ul className="my-2">
                     <li className="flex justify-between my-5">
                         <input
                             ref={truckRef}
-                            placeholder="Truck no"
-                            className="w-45 p-2 text-center mr-2 border-b-2 text-lg font-bold border-white focus:outline-none"
+                            placeholder={
+                                truck ? truck.toUpperCase() : "Truck no"
+                            }
+                            className="p-1 w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-bl-sm rounded-tl-sm focus:outline-none"
                         />
                         <button
-                            className="p-2 font-bold bg-blue-600 rounded-sm"
+                            className="p-1 font-bold bg-blue-600  rounded-br-sm rounded-tr-sm"
                             onClick={handleUpdateTruck}>
                             Update
                         </button>
