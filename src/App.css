@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+.text-Free {
+    @apply text-emerald-600;
+}
+.text-Almost {
+    @apply text-yellow-600;
+}
+.text-Loading {
+    @apply text-red-600;
+}
+.text-Blocked {
+    @apply text-stone-600;
+}

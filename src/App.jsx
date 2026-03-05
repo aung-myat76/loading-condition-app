@@ -132,8 +132,8 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "All"
-                                    ? "bg-blue-600 border-3 border-stone-300"
-                                    : "bg-blue-600/75")
+                                    ? "bg-blue-600 "
+                                    : "bg-blue-600/50")
                             }>
                             All [{trucks.length}]
                         </button>
@@ -145,8 +145,8 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Free"
-                                    ? "bg-emerald-600 border-3 border-stone-300"
-                                    : "bg-emerald-600/75")
+                                    ? "bg-emerald-600 "
+                                    : "bg-emerald-600/50")
                             }>
                             Free [
                             {trucks.filter((t) => t.condition == "Free").length}
@@ -160,8 +160,8 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Almost"
-                                    ? "bg-yellow-600 border-3 border-stone-300"
-                                    : "bg-yellow-600/75")
+                                    ? "bg-yellow-600 "
+                                    : "bg-yellow-600/50")
                             }>
                             Almost [
                             {
@@ -178,8 +178,8 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Loading"
-                                    ? "bg-red-600 border-3 border-stone-300"
-                                    : "bg-red-600/75")
+                                    ? "bg-red-600 "
+                                    : "bg-red-600/50")
                             }>
                             Loading [
                             {
@@ -196,8 +196,8 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Blocked"
-                                    ? "bg-stone-600 border-3 border-stone-300"
-                                    : "bg-stone-600/75")
+                                    ? "bg-stone-600 "
+                                    : "bg-stone-600/50")
                             }>
                             Blocked [
                             {
