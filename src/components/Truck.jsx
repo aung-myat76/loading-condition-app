@@ -2,13 +2,13 @@ import { useState } from "react";
 import cn from "../lib/cn";
 import Modal from "./Modal";
 
-const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
+const Truck = ({ id, loadingBay, truckNo, condition, updateCondition }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleUpdateState = async (state) => {
         if (state) {
             if (state === "Free") {
-                await updateCondition(id, { truck: null });
+                await updateCondition(id, { truck_no: null });
             }
             await updateCondition(id, { condition: state });
         }
@@ -36,17 +36,17 @@ const Truck = ({ id, loadingBill, truck, condition, updateCondition }) => {
     return (
         <>
             <Modal
-                bill={loadingBill}
+                loadingBay={loadingBay}
                 id={id}
                 isOpen={isOpen}
                 onClose={onClose}
                 cb={handleUpdateState}
-                truck={truck}
+                truckNo={truckNo}
             />
             <li className={liCls} onClick={onOpen}>
-                <h2 className="text-xl font-bold">{loadingBill}</h2>
+                <h2 className="text-xl font-bold">{loadingBay}</h2>
                 <p className="text-center my-2 font-bold">
-                    {truck ? String(truck).toUpperCase() : "-"}
+                    {truckNo ? String(truckNo).toUpperCase() : "-"}
                 </p>
             </li>
         </>

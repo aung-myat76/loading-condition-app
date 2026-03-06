@@ -17,11 +17,11 @@ const TruckList = ({ trucks, state, updateCondition }) => {
                 filterTrucks.map((truck) => {
                     return (
                         <Truck
-                            key={truck.$id}
-                            id={truck.$id}
-                            loadingBill={truck["loading-bill"]}
+                            key={truck.id}
+                            id={truck.id}
+                            loadingBay={truck["loading_bay"]}
                             condition={truck["condition"]}
-                            truck={truck["truck"]}
+                            truckNo={truck["truck_no"]}
                             updateCondition={updateCondition}
                         />
                     );

@@ -1,10 +1,12 @@
 import ReactDom from "react-dom";
 import { useRef } from "react";
 import { collectionId, databases, dbId } from "../lib/appwrite";
+import { supabase } from "../superbaseClient";
 
-const Modal = ({ id, truck, bill, isOpen, onClose, cb }) => {
+const Modal = ({ id, truckNo, loadingBay, isOpen, onClose, cb }) => {
     const truckRef = useRef(null);
     if (!isOpen) return null;
+    console.log(truckNo);
 
     const handleSelect = async (state) => {
         await cb(state);
@@ -12,9 +14,13 @@ const Modal = ({ id, truck, bill, isOpen, onClose, cb }) => {
     };
 
     const handleUpdateTruck = async () => {
-        await databases.updateDocument(dbId, collectionId, id, {
-            truck: truckRef.current.value || "-"
-        });
+        // await databases.updateDocument(dbId, collectionId, id, {
+        //     truck_no: truckRef.current.value || '-'
+        // });
+        await supabase
+            .from("trucks")
+            .update({ truck_no: truckRef.current.value || null })
+            .eq("id", id);
         onClose();
     };
 
@@ -28,7 +34,7 @@ const Modal = ({ id, truck, bill, isOpen, onClose, cb }) => {
                 className="bg-stone-900 w-75 rounded-md p-5 text-white"
                 onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between">
-                    <h1 className="font-bold text-xl ">{bill}</h1>
+                    <h1 className="font-bold text-xl ">{loadingBay}</h1>
                     <button
                         onClick={onClose}
                         className=" bg-stone-600 px-3 py-1 text-lg text-white rounded-sm">
@@ -40,7 +46,7 @@ const Modal = ({ id, truck, bill, isOpen, onClose, cb }) => {
                         <input
                             ref={truckRef}
                             placeholder={
-                                truck ? truck.toUpperCase() : "Truck no"
+                                !truckNo ? "Truck no" : truckNo.toUpperCase()
                             }
                             className="p-1 w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-bl-sm rounded-tl-sm focus:outline-none"
                         />
