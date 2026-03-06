@@ -75,7 +75,7 @@ const ConfirmModal = ({ isOpen, onClose, cb }) => {
                         <button
                             className="p-2 rounded-sm bg-red-600"
                             onClick={handleConfirm}>
-                            Reset
+                            Confirm
                         </button>
                     </div>
                 </div>

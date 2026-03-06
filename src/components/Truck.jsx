@@ -7,7 +7,7 @@ const Truck = ({ id, loadingBay, truckNo, condition, updateCondition }) => {
 
     const handleUpdateState = async (state) => {
         if (state) {
-            if (state === "Free") {
+            if (state === "Free" || state === "Blocked") {
                 await updateCondition(id, { truck_no: null });
             }
             await updateCondition(id, { condition: state });
