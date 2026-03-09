@@ -2,13 +2,20 @@ import { useState } from "react";
 import cn from "../lib/cn";
 import Modal from "./Modal";
 
-const Truck = ({ id, loadingBay, truckNo, condition, updateCondition }) => {
+const Truck = ({
+    id,
+    loadingBay,
+    truckNo,
+    type,
+    condition,
+    updateCondition
+}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleUpdateState = async (state) => {
         if (state) {
             if (state === "Free" || state === "Blocked") {
-                await updateCondition(id, { truck_no: null });
+                await updateCondition(id, { truck_no: null, type: null });
             }
             await updateCondition(id, { condition: state });
         }
@@ -42,11 +49,15 @@ const Truck = ({ id, loadingBay, truckNo, condition, updateCondition }) => {
                 onClose={onClose}
                 cb={handleUpdateState}
                 truckNo={truckNo}
+                type={type}
             />
             <li className={liCls} onClick={onOpen}>
                 <h2 className="text-xl font-bold">{loadingBay}</h2>
                 <p className="text-center my-2 font-bold">
-                    {truckNo ? String(truckNo).toUpperCase() : "-"}
+                    <span>{truckNo ? String(truckNo).toUpperCase() : "-"}</span>
+                    {type && (
+                        <span className="text-center"> {`(${type})`}</span>
+                    )}
                 </p>
             </li>
         </>

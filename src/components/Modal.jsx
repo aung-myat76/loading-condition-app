@@ -3,10 +3,10 @@ import { useRef } from "react";
 import { collectionId, databases, dbId } from "../lib/appwrite";
 import { supabase } from "../superbaseClient";
 
-const Modal = ({ id, truckNo, loadingBay, isOpen, onClose, cb }) => {
+const Modal = ({ id, truckNo, type, loadingBay, isOpen, onClose, cb }) => {
     const truckRef = useRef(null);
+    const typeRef = useRef(null);
     if (!isOpen) return null;
-    console.log(truckNo);
 
     const handleSelect = async (state) => {
         await cb(state);
@@ -19,7 +19,10 @@ const Modal = ({ id, truckNo, loadingBay, isOpen, onClose, cb }) => {
         // });
         await supabase
             .from("trucks")
-            .update({ truck_no: truckRef.current.value || null })
+            .update({
+                truck_no: truckRef.current.value || null,
+                type: typeRef.current.value || null
+            })
             .eq("id", id);
         onClose();
     };
@@ -45,13 +48,25 @@ const Modal = ({ id, truckNo, loadingBay, isOpen, onClose, cb }) => {
                     <li className="flex justify-between my-5">
                         <input
                             ref={truckRef}
+                            defaultValue={truckNo}
                             placeholder={
                                 !truckNo ? "Truck no" : truckNo.toUpperCase()
                             }
-                            className="p-1 w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-bl-sm rounded-tl-sm focus:outline-none"
+                            className="p-1 w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none"
                         />
+                        <select
+                            name="types"
+                            ref={typeRef}
+                            defaultValue={type}
+                            placeholder={!type ? "Type" : type}
+                            className="p-1 mx-2 text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
+                            <option value={""}>Type</option>
+                            <option value={"6"}>6</option>
+                            <option value={"12"}>12</option>
+                            <option value={"22"}>22</option>
+                        </select>
                         <button
-                            className="p-1 font-bold bg-blue-600  rounded-br-sm rounded-tr-sm"
+                            className="p-1 font-bold bg-blue-600  rounded-sm"
                             onClick={handleUpdateTruck}>
                             Update
                         </button>

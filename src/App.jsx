@@ -37,12 +37,29 @@ const App = () => {
             console.log(updatedTrucks);
             updatedTrucks[updateTruckIndex].condition = newState.condition;
             updatedTrucks[updateTruckIndex]["truck_no"] = newState["truck_no"];
+            updatedTrucks[updateTruckIndex]["type"] = newState["type"];
+
             return updatedTrucks;
         });
-        console.log(newState);
         // return await databases.updateDocument(dbId, collectionId, id, newState);
         return await supabase.from("trucks").update(newState).eq("id", id);
     }, []);
+
+    const getLastUpdatedTime = () => {
+        const times = trucks.map((t) => new Date(t.updated_at).getTime());
+        const lastTime = Math.max(...times);
+
+        const date = new Date(lastTime);
+        console.log(date, lastTime);
+        const dateString = date.toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+
+            hour12: false
+        });
+
+        return dateString;
+    };
 
     useEffect(() => {
         const getData = async () => {
@@ -110,13 +127,13 @@ const App = () => {
         // });
         const { data } = await supabase
             .from("trucks")
-            .update({ condition: "Free", truck_no: null })
+            .update({ condition: "Free", truck_no: null, type: null })
             .not("id", "is", null);
         // await Promise.all(allPromises);
         setTrucks((preTrucks) => {
             const updatedTrucks = [...preTrucks];
             updatedTrucks.map((t) => {
-                (t.condition = "Free"), (t.truck_no = "-");
+                (t.condition = "Free"), (t.truck_no = "-"), (t.type = null);
             });
             console.log(updatedTrucks);
             return updatedTrucks;
@@ -141,9 +158,15 @@ const App = () => {
                         </button>
                     </div>
                 </header>
-                <div className="flex gap-2 items-center justify-between">
+                <div className="flex gap-2 items-center justify-around">
                     {/* <p className=" font-bold mx-3">{getShift()}</p> */}
-                    <p className=" font-bold mx-3">{nowDate}</p>
+                    <p className=" font-bold">{nowDate}</p>
+                    <p className="">
+                        last updated at -{" "}
+                        <span className="font-bold">
+                            {getLastUpdatedTime()}
+                        </span>
+                    </p>
                 </div>
                 <ul className="flex gap-2 items-center justify-center my-3 text-sm text-white">
                     <li>
