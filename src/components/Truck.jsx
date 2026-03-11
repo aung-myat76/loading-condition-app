@@ -56,7 +56,7 @@ const Truck = ({
                 <p className="text-center my-2 font-bold">
                     <span>{truckNo ? String(truckNo).toUpperCase() : "-"}</span>
                     {type && (
-                        <span className="text-center"> {`(${type})`}</span>
+                        <span className="text-center"> {`(${type})W`}</span>
                     )}
                 </p>
             </li>
