@@ -204,7 +204,7 @@ const App = () => {
                             ]
                         </button>
                     </li>
-                    <li>
+                    {/* <li>
                         <button
                             onClick={() => setState("Almost")}
                             className={
@@ -221,20 +221,53 @@ const App = () => {
                             }
                             ]
                         </button>
-                    </li>
+                    </li> */}
                     <li>
                         <button
-                            onClick={() => setState("Loading")}
+                            onClick={() => setState("Start")}
                             className={
                                 stateChangeCls +
                                 " " +
-                                (state === "Loading"
+                                (state === "Start"
+                                    ? "bg-yellow-400 "
+                                    : "bg-yellow-400/50")
+                            }>
+                            Start [
+                            {
+                                trucks.filter((t) => t.condition == "Start")
+                                    .length
+                            }
+                            ]
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            onClick={() => setState("Half")}
+                            className={
+                                stateChangeCls +
+                                " " +
+                                (state === "Half"
+                                    ? "bg-orange-600 "
+                                    : "bg-orange-600/50")
+                            }>
+                            Half [
+                            {trucks.filter((t) => t.condition == "Half").length}
+                            ]
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            onClick={() => setState("Loaded")}
+                            className={
+                                stateChangeCls +
+                                " " +
+                                (state === "Loaded"
                                     ? "bg-red-600 "
                                     : "bg-red-600/50")
                             }>
-                            Loading [
+                            Loaded [
                             {
-                                trucks.filter((t) => t.condition == "Loading")
+                                trucks.filter((t) => t.condition == "Loaded")
                                     .length
                             }
                             ]

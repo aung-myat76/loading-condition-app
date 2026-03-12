@@ -78,18 +78,32 @@ const Modal = ({ id, truckNo, type, loadingBay, isOpen, onClose, cb }) => {
                             Free
                         </button>
                     </li>
-                    <li>
+                    {/* <li>
                         <button
                             className="p-2 my-2 rounded-sm w-full block font-bold bg-yellow-600"
                             onClick={() => handleSelect("Almost")}>
                             Almost
                         </button>
+                    </li> */}
+                    <li>
+                        <button
+                            className="p-2 my-2 rounded-sm w-full block font-bold bg-yellow-400"
+                            onClick={() => handleSelect("Start")}>
+                            Start
+                        </button>
                     </li>
                     <li>
                         <button
-                            className="p-2 my-2 rounded-sm w-full block font-bold bg-red-600"
-                            onClick={() => handleSelect("Loading")}>
-                            Loading
+                            className="p-2 my-2 rounded-sm w-full block font-bold bg-orange-500"
+                            onClick={() => handleSelect("Half")}>
+                            Half
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            className="p-2 my-2 rounded-sm w-full block font-bold bg-red-700"
+                            onClick={() => handleSelect("Loaded")}>
+                            Loaded
                         </button>
                     </li>
                     <li>

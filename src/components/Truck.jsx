@@ -33,11 +33,15 @@ const Truck = ({
         "flex flex-col   px-3 text-white rounded-md w-27 min-h-23 it",
         condition === "Free"
             ? "bg-emerald-600"
-            : condition === "Almost"
-              ? "bg-yellow-600"
-              : condition === "Blocked"
-                ? "bg-stone-600"
-                : "bg-red-600"
+            : condition === "Start"
+              ? "bg-yellow-400"
+              : condition === "Half"
+                ? "bg-orange-600"
+                : condition === "Loaded"
+                  ? "bg-red-600"
+                  : condition === "Blocked"
+                    ? "bg-stone-600"
+                    : "bg-red-600"
     );
 
     return (
