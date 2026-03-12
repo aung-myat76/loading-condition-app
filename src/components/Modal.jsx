@@ -62,7 +62,9 @@ const Modal = ({ id, truckNo, type, loadingBay, isOpen, onClose, cb }) => {
                             className="p-1 mx-2 text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
                             <option value={""}>Type</option>
                             <option value={"6"}>6</option>
+                            <option value={"10"}>10</option>
                             <option value={"12"}>12</option>
+                            <option value={"20"}>20</option>
                             <option value={"22"}>22</option>
                         </select>
                         <button
