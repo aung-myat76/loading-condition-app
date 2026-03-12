@@ -91,7 +91,7 @@ const Modal = ({
                             placeholder={
                                 !distributor ? "Distributor" : distributor
                             }
-                            className=" w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
+                            className=" w-full text-center my-1 p-1 text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
                             <option value={""}>Distributor</option>
                             <option value={"MBL"}>MBL</option>
                             <option value={"Nehru"}>Nehru</option>

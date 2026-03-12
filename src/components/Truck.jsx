@@ -41,9 +41,9 @@ const Truck = ({
             : condition === "Start"
               ? "bg-yellow-300"
               : condition === "Half"
-                ? "bg-orange-500"
+                ? "bg-orange-400"
                 : condition === "Loaded"
-                  ? "bg-red-600"
+                  ? "bg-red-800"
                   : condition === "Blocked"
                     ? "bg-stone-600"
                     : "bg-red-600"
@@ -68,7 +68,7 @@ const Truck = ({
                         <span className="">
                             {truckNo ? String(truckNo).toUpperCase() : "-"}
                         </span>
-                        {type && <span className=""> {` - ${type}W`}</span>}
+                        {type && <span className="ml-1">{`- ${type}W`}</span>}
                     </p>
                     <div>{distributor}</div>
                 </div>
