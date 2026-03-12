@@ -45,22 +45,25 @@ const Modal = ({ id, truckNo, type, loadingBay, isOpen, onClose, cb }) => {
                     </button>
                 </div>
                 <ul className="my-2">
-                    <li className="flex justify-between my-5">
-                        <input
-                            ref={truckRef}
-                            defaultValue={truckNo}
-                            placeholder={
-                                !truckNo ? "Truck no" : truckNo.toUpperCase()
-                            }
-                            className="p-1 w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none"
-                        />
-                        <div>
+                    <li className="flex flex-col gap-1">
+                        <div className="flex gap-2">
+                            <input
+                                ref={truckRef}
+                                defaultValue={truckNo}
+                                placeholder={
+                                    !truckNo
+                                        ? "Truck no"
+                                        : truckNo.toUpperCase()
+                                }
+                                className="p-1 w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none"
+                            />
+
                             <select
                                 name="types"
                                 ref={typeRef}
                                 defaultValue={type}
                                 placeholder={!type ? "Type" : type}
-                                className="p-1 mx-2 text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
+                                className="p-1 text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
                                 <option value={""}>Type</option>
                                 <option value={"6"}>6</option>
                                 <option value={"10"}>10</option>
@@ -69,11 +72,33 @@ const Modal = ({ id, truckNo, type, loadingBay, isOpen, onClose, cb }) => {
                                 <option value={"22"}>22</option>
                             </select>
                         </div>
+                        {/* <div className="mt-2 flex gap-7"> */}
+                        <select
+                            name="types"
+                            ref={typeRef}
+                            defaultValue={type}
+                            placeholder={!type ? "Type" : type}
+                            className=" w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
+                            <option value={""}>Distributor</option>
+                            <option value={"MBL"}>MBL</option>
+                            <option value={"Nehru"}>Nehru</option>
+                            <option value={"TPN"}>TPN</option>
+                            <option value={"STC"}>STC</option>
+                            <option value={"KG"}>KG</option>
+                            <option value={"KKA"}>KKA</option>
+                            <option value={"BDL"}>BDL</option>
+                            <option value={"YCO"}>YCO</option>
+                            <option value={"K-Kan"}>K-Kan</option>
+                            <option value={"NMMK"}>NMMK</option>
+                            <option value={"N-Star"}>N-Star</option>
+                            <option value={"T-Party"}>T-Party</option>
+                        </select>
                         <button
                             className="p-1 font-bold bg-blue-600  rounded-sm"
                             onClick={handleUpdateTruck}>
                             Update
                         </button>
+                        {/* </div> */}
                     </li>
                     <li>
                         <button
