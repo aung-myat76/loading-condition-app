@@ -229,8 +229,8 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Start"
-                                    ? "bg-yellow-400 "
-                                    : "bg-yellow-400/50")
+                                    ? "bg-yellow-300 "
+                                    : "bg-yellow-300/50")
                             }>
                             Start [
                             {
@@ -247,8 +247,8 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Half"
-                                    ? "bg-orange-600 "
-                                    : "bg-orange-600/50")
+                                    ? "bg-orange-500 "
+                                    : "bg-orange-500/50")
                             }>
                             Half [
                             {trucks.filter((t) => t.condition == "Half").length}

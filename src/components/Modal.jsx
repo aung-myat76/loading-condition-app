@@ -54,19 +54,21 @@ const Modal = ({ id, truckNo, type, loadingBay, isOpen, onClose, cb }) => {
                             }
                             className="p-1 w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none"
                         />
-                        <select
-                            name="types"
-                            ref={typeRef}
-                            defaultValue={type}
-                            placeholder={!type ? "Type" : type}
-                            className="p-1 mx-2 text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
-                            <option value={""}>Type</option>
-                            <option value={"6"}>6</option>
-                            <option value={"10"}>10</option>
-                            <option value={"12"}>12</option>
-                            <option value={"20"}>20</option>
-                            <option value={"22"}>22</option>
-                        </select>
+                        <div>
+                            <select
+                                name="types"
+                                ref={typeRef}
+                                defaultValue={type}
+                                placeholder={!type ? "Type" : type}
+                                className="p-1 mx-2 text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
+                                <option value={""}>Type</option>
+                                <option value={"6"}>6</option>
+                                <option value={"10"}>10</option>
+                                <option value={"12"}>12</option>
+                                <option value={"20"}>20</option>
+                                <option value={"22"}>22</option>
+                            </select>
+                        </div>
                         <button
                             className="p-1 font-bold bg-blue-600  rounded-sm"
                             onClick={handleUpdateTruck}>
