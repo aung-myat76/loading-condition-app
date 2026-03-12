@@ -30,7 +30,7 @@ const Truck = ({
     };
 
     const liCls = cn(
-        "flex flex-col   px-3 text-white rounded-md w-27 min-h-23 it",
+        "flex flex-col   px-1 text-white rounded-md w-27 min-h-23 it",
         condition === "Free"
             ? "bg-emerald-600"
             : condition === "Start"
@@ -57,11 +57,11 @@ const Truck = ({
             />
             <li className={liCls} onClick={onOpen}>
                 <h2 className="text-xl font-bold">{loadingBay}</h2>
-                <p className="text-center my-2 font-bold">
-                    <span>{truckNo ? String(truckNo).toUpperCase() : "-"}</span>
-                    {type && (
-                        <span className="text-center"> {`(${type})W`}</span>
-                    )}
+                <p className=" my-1 font-bold flex text-[12px] items-center justify-center">
+                    <span className="">
+                        {truckNo ? String(truckNo).toUpperCase() : "-"}
+                    </span>
+                    {type && <span className=""> {` - ${type}W`}</span>}
                 </p>
             </li>
         </>
