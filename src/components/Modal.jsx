@@ -107,13 +107,13 @@ const Modal = ({
                             <option value={"T-Party"}>T-Party</option>
                         </select>
                         <button
-                            className="p-1 font-bold bg-blue-600  rounded-sm"
+                            className="p-2 font-bold bg-blue-600  rounded-sm"
                             onClick={handleUpdateTruck}>
                             Update
                         </button>
                         {/* </div> */}
                     </li>
-                    <li>
+                    <li className="mt-5">
                         <button
                             className="p-2 my-2 rounded-sm w-full block font-bold bg-emerald-600"
                             onClick={() => handleSelect("Free")}>
