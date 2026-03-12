@@ -160,13 +160,20 @@ const App = () => {
                 </header>
                 <div className="flex gap-2 items-center justify-around">
                     {/* <p className=" font-bold mx-3">{getShift()}</p> */}
-                    <p className=" font-bold">{nowDate}</p>
+                    {/* <p className=" font-bold">{nowDate}</p>
                     <p className="">
                         last updated at -{" "}
-                        <span className="font-bold">
+                        <span className="font-boldzx">
                             {getLastUpdatedTime()}
                         </span>
-                    </p>
+                    </p> */}
+                    <div className="flex flex-col justify-center items-center text-center bg-red-200 p-2 rounded-md">
+                        <h2 className="font-bold">Warning</h2>
+                        <p>
+                            Please don't use the app now. <br />
+                            we're currently upgrading our app.
+                        </p>
+                    </div>
                 </div>
                 <ul className="flex gap-2 items-center justify-center my-3 text-sm text-white">
                     <li>
