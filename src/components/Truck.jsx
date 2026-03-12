@@ -30,7 +30,7 @@ const Truck = ({
     };
 
     const liCls = cn(
-        "flex flex-col   px-1 text-white rounded-md w-27 min-h-23 it",
+        "flex flex-col   px-1 text-stone-900 rounded-md w-27 min-h-23 it",
         condition === "Free"
             ? "bg-emerald-600"
             : condition === "Start"
