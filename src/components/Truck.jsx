@@ -63,8 +63,8 @@ const Truck = ({
             />
             <li className={liCls} onClick={onOpen}>
                 <h2 className="text-xl font-bold">{loadingBay}</h2>
-                <div className="flex flex-col text-stone-900 font-bold items-center justify-center ">
-                    <p className=" my-1  flex text-[12px] text-stone-900  items-center justify-center">
+                <div className="flex flex-col text-stone-900  font-bold items-center justify-center ">
+                    <p className=" my-1  flex text-[12px]   items-center justify-center">
                         <span className="">
                             {truckNo ? String(truckNo).toUpperCase() : "-"}
                         </span>

@@ -257,8 +257,8 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Half"
-                                    ? "bg-orange-500 "
-                                    : "bg-orange-500/50")
+                                    ? "bg-orange-400 "
+                                    : "bg-orange-400/50")
                             }>
                             Half [
                             {trucks.filter((t) => t.condition == "Half").length}
@@ -272,8 +272,8 @@ const App = () => {
                                 stateChangeCls +
                                 " " +
                                 (state === "Loaded"
-                                    ? "bg-red-600 "
-                                    : "bg-red-600/50")
+                                    ? "bg-red-800 "
+                                    : "bg-red-800/50")
                             }>
                             Loaded [
                             {
