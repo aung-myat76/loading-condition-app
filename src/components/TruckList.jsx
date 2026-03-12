@@ -23,6 +23,7 @@ const TruckList = ({ trucks, state, updateCondition }) => {
                             condition={truck["condition"]}
                             truckNo={truck["truck_no"]}
                             type={truck["type"]}
+                            distributor={truck["distributor"]}
                             updateCondition={updateCondition}
                         />
                     );

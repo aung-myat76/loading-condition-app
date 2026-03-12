@@ -38,6 +38,8 @@ const App = () => {
             updatedTrucks[updateTruckIndex].condition = newState.condition;
             updatedTrucks[updateTruckIndex]["truck_no"] = newState["truck_no"];
             updatedTrucks[updateTruckIndex]["type"] = newState["type"];
+            updatedTrucks[updateTruckIndex]["distributor"] =
+                newState["distributor"];
 
             return updatedTrucks;
         });
@@ -127,13 +129,21 @@ const App = () => {
         // });
         const { data } = await supabase
             .from("trucks")
-            .update({ condition: "Free", truck_no: null, type: null })
+            .update({
+                condition: "Free",
+                truck_no: null,
+                type: null,
+                distributor: null
+            })
             .not("id", "is", null);
         // await Promise.all(allPromises);
         setTrucks((preTrucks) => {
             const updatedTrucks = [...preTrucks];
             updatedTrucks.map((t) => {
-                (t.condition = "Free"), (t.truck_no = "-"), (t.type = null);
+                (t.condition = "Free"),
+                    (t.truck_no = "-"),
+                    (t.type = null),
+                    (t.distributor = null);
             });
             console.log(updatedTrucks);
             return updatedTrucks;

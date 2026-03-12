@@ -3,9 +3,19 @@ import { useRef } from "react";
 import { collectionId, databases, dbId } from "../lib/appwrite";
 import { supabase } from "../superbaseClient";
 
-const Modal = ({ id, truckNo, type, loadingBay, isOpen, onClose, cb }) => {
+const Modal = ({
+    id,
+    truckNo,
+    type,
+    distributor,
+    loadingBay,
+    isOpen,
+    onClose,
+    cb
+}) => {
     const truckRef = useRef(null);
     const typeRef = useRef(null);
+    const distributorRef = useRef(null);
     if (!isOpen) return null;
 
     const handleSelect = async (state) => {
@@ -21,7 +31,8 @@ const Modal = ({ id, truckNo, type, loadingBay, isOpen, onClose, cb }) => {
             .from("trucks")
             .update({
                 truck_no: truckRef.current.value || null,
-                type: typeRef.current.value || null
+                type: typeRef.current.value || null,
+                distributor: distributorRef.current.value || null
             })
             .eq("id", id);
         onClose();
@@ -74,10 +85,12 @@ const Modal = ({ id, truckNo, type, loadingBay, isOpen, onClose, cb }) => {
                         </div>
                         {/* <div className="mt-2 flex gap-7"> */}
                         <select
-                            name="types"
-                            ref={typeRef}
-                            defaultValue={type}
-                            placeholder={!type ? "Type" : type}
+                            name="distributors"
+                            ref={distributorRef}
+                            defaultValue={distributor}
+                            placeholder={
+                                !distributor ? "Distributor" : distributor
+                            }
                             className=" w-full text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
                             <option value={""}>Distributor</option>
                             <option value={"MBL"}>MBL</option>

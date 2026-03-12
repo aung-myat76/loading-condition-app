@@ -7,6 +7,7 @@ const Truck = ({
     loadingBay,
     truckNo,
     type,
+    distributor,
     condition,
     updateCondition
 }) => {
@@ -15,7 +16,11 @@ const Truck = ({
     const handleUpdateState = async (state) => {
         if (state) {
             if (state === "Free" || state === "Blocked") {
-                await updateCondition(id, { truck_no: null, type: null });
+                await updateCondition(id, {
+                    truck_no: null,
+                    type: null,
+                    distributor: null
+                });
             }
             await updateCondition(id, { condition: state });
         }
@@ -54,15 +59,19 @@ const Truck = ({
                 cb={handleUpdateState}
                 truckNo={truckNo}
                 type={type}
+                distributor={distributor}
             />
             <li className={liCls} onClick={onOpen}>
                 <h2 className="text-xl font-bold">{loadingBay}</h2>
-                <p className=" my-1 font-bold flex text-[12px] text-stone-900 items-center justify-center">
-                    <span className="">
-                        {truckNo ? String(truckNo).toUpperCase() : "-"}
-                    </span>
-                    {type && <span className=""> {` - ${type}W`}</span>}
-                </p>
+                <div className="flex flex-col text-stone-900 items-center justify-center ">
+                    <p className=" my-1 font-bold flex text-[12px] text-stone-900 items-center justify-center">
+                        <span className="">
+                            {truckNo ? String(truckNo).toUpperCase() : "-"}
+                        </span>
+                        {type && <span className=""> {` - ${type}W`}</span>}
+                    </p>
+                    <div>{distributor}</div>
+                </div>
             </li>
         </>
     );
