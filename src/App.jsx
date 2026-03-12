@@ -151,7 +151,7 @@ const App = () => {
         setLoading(false);
     };
 
-    const stateChangeCls = cn("p-2 rounded-md text-[14px] font-bold");
+    const stateChangeCls = cn("p-2 rounded-md text-[10px] font-bold");
 
     return (
         <>
@@ -185,7 +185,7 @@ const App = () => {
                         </p>
                     </div> */}
                 </div>
-                <ul className="flex gap-2 items-center justify-center my-3 text-sm text-white">
+                <ul className="flex gap-1  my-3 text-white ">
                     <li>
                         <button
                             onClick={() => setState("All")}
@@ -196,7 +196,7 @@ const App = () => {
                                     ? "bg-blue-600 "
                                     : "bg-blue-600/50")
                             }>
-                            All [{trucks.length}]
+                            Total Loading [{trucks.length}]
                         </button>
                     </li>
                     <li>
@@ -209,7 +209,7 @@ const App = () => {
                                     ? "bg-emerald-600 "
                                     : "bg-emerald-600/50")
                             }>
-                            Free [
+                            Free Loading [
                             {trucks.filter((t) => t.condition == "Free").length}
                             ]
                         </button>
@@ -242,7 +242,7 @@ const App = () => {
                                     ? "bg-yellow-300 "
                                     : "bg-yellow-300/50")
                             }>
-                            Start [
+                            Start Loading [
                             {
                                 trucks.filter((t) => t.condition == "Start")
                                     .length
@@ -260,7 +260,7 @@ const App = () => {
                                     ? "bg-orange-400 "
                                     : "bg-orange-400/50")
                             }>
-                            Half [
+                            Half Loaded [
                             {trucks.filter((t) => t.condition == "Half").length}
                             ]
                         </button>
@@ -275,7 +275,7 @@ const App = () => {
                                     ? "bg-red-800 "
                                     : "bg-red-800/50")
                             }>
-                            Loaded [
+                            Fully Loaded [
                             {
                                 trucks.filter((t) => t.condition == "Loaded")
                                     .length
@@ -293,7 +293,7 @@ const App = () => {
                                     ? "bg-stone-600 "
                                     : "bg-stone-600/50")
                             }>
-                            Blocked [
+                            Blocked Loading [
                             {
                                 trucks.filter((t) => t.condition == "Blocked")
                                     .length
