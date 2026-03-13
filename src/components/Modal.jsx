@@ -117,7 +117,7 @@ const Modal = ({
                         <button
                             className="p-2 my-2 rounded-sm w-full block font-bold bg-emerald-600"
                             onClick={() => handleSelect("Free")}>
-                            Free
+                            Free Loading
                         </button>
                     </li>
                     {/* <li>
@@ -131,28 +131,28 @@ const Modal = ({
                         <button
                             className="p-2 my-2 rounded-sm w-full block font-bold bg-yellow-400"
                             onClick={() => handleSelect("Start")}>
-                            Start
+                            Start Loading
                         </button>
                     </li>
                     <li>
                         <button
                             className="p-2 my-2 rounded-sm w-full block font-bold bg-orange-500"
                             onClick={() => handleSelect("Half")}>
-                            Half
+                            Half Loaded
                         </button>
                     </li>
                     <li>
                         <button
                             className="p-2 my-2 rounded-sm w-full block font-bold bg-red-700"
                             onClick={() => handleSelect("Loaded")}>
-                            Loaded
+                            Fully Loaded
                         </button>
                     </li>
                     <li>
                         <button
                             className="p-2 my-2 rounded-sm w-full block font-bold bg-stone-600"
                             onClick={() => handleSelect("Blocked")}>
-                            Blocked
+                            Blocked Loading
                         </button>
                     </li>
                 </ul>

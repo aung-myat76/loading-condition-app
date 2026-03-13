@@ -159,7 +159,9 @@ const App = () => {
             <ConfirmModal isOpen={isOpen} onClose={onClose} cb={handleReset} />
             <div>
                 <header className="flex items-center justify-between py-3 px-1 bg-emerald-800 text-white mb-5">
-                    <h1 className="text-lg font-bold">Loading Condition</h1>
+                    <h1 className="text-md font-bold">
+                        CWH ( YARD Management System )
+                    </h1>
 
                     <div>
                         <button
@@ -186,7 +188,7 @@ const App = () => {
                         </p>
                     </div> */}
                 </div>
-                <ul className="flex justify-center gap-1  my-3 text-white ">
+                <ul className="flex gap-1 justify-center my-3 text-white ">
                     <li>
                         <button
                             onClick={() => setState("All")}
