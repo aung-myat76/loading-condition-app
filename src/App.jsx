@@ -5,6 +5,7 @@ import TruckList from "./components/TruckList";
 import cn from "./lib/cn";
 import ConfirmModal from "./components/ConfirmModal";
 import { supabase } from "./superbaseClient";
+import Packaging from "./pages/packaging";
 
 const now = new Date();
 const nowDate = now.toLocaleDateString("en-GB");
@@ -185,7 +186,7 @@ const App = () => {
                         </p>
                     </div> */}
                 </div>
-                <ul className="flex gap-1  my-3 text-white ">
+                <ul className="flex justify-center gap-1  my-3 text-white ">
                     <li>
                         <button
                             onClick={() => setState("All")}
@@ -316,6 +317,7 @@ const App = () => {
                     />
                 )}
             </div>
+            {trucks.length > 0 && <Packaging />}
         </>
     );
 };
