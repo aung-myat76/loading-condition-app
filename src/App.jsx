@@ -176,7 +176,7 @@ const App = () => {
                     <p className=" font-bold">{nowDate}</p>
                     <p className="">
                         last updated at -{" "}
-                        <span className="font-boldzx">
+                        <span className="font-bold">
                             {getLastUpdatedTime()}
                         </span>
                     </p>
