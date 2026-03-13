@@ -185,7 +185,7 @@ const App = () => {
                         </p>
                     </div> */}
                 </div>
-                <ul className="flex gap-1  my-3 text-white ">
+                <ul className="flex gap-1 justify-center my-3 text-white ">
                     <li>
                         <button
                             onClick={() => setState("All")}
