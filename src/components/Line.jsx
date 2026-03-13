@@ -9,7 +9,7 @@ const Line = ({ id, name, item, status, remark, updateLine }) => {
     const onOpen = () => setIsOpen(true);
 
     const liCls = cn(
-        "flex flex-col   p-2 text-white rounded-md w-40 min-h-35",
+        "flex flex-col   p-2 text-white rounded-md w-40 min-h-35 cursor-pointer",
         status === "Running"
             ? "bg-emerald-600"
             : status === "No Production"
@@ -24,8 +24,9 @@ const Line = ({ id, name, item, status, remark, updateLine }) => {
                     item: null,
                     remark: null
                 });
+            } else {
+                await updateLine(id, { status: state });
             }
-            await updateLine(id, { status: state });
         }
     };
     console.log(item);
@@ -42,12 +43,12 @@ const Line = ({ id, name, item, status, remark, updateLine }) => {
             />
             <li className={liCls} onClick={onOpen}>
                 <h2 className="text-xl font-bold">{name}</h2>
-                <div className="flex flex-col text-white  font-bold  ">
-                    <p className=" my-1  flex text-[12px]    ">
+                <div className="flex flex-col text-[10px] text-white  font-bold  ">
+                    <p className=" my-1  flex    ">
                         <span className="">Item - {!item ? "" : item}</span>
                     </p>
                     <div>Status - {!status ? "Unknown" : status}</div>
-                    <div> {remark}</div>
+                    <div>{remark}</div>
                 </div>
             </li>
         </>

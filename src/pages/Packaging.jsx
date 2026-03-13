@@ -19,7 +19,7 @@ const Packaging = () => {
         getData();
 
         const unsubscribe = supabase
-            .channel("custom-all-channel")
+            .channel("packaging-channel")
             .on(
                 "postgres_changes",
                 {
@@ -29,8 +29,8 @@ const Packaging = () => {
                 },
                 (payload) => {
                     if (payload.eventType === "UPDATE") {
-                        setLines((currentTrucks) =>
-                            currentTrucks.map((t) =>
+                        setLines((currentLines) =>
+                            currentLines.map((t) =>
                                 t.id === payload.new.id ? payload.new : t
                             )
                         );
