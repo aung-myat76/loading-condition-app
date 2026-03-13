@@ -5,7 +5,7 @@ import TruckList from "./components/TruckList";
 import cn from "./lib/cn";
 import ConfirmModal from "./components/ConfirmModal";
 import { supabase } from "./superbaseClient";
-import Packaging from "./pages/packaging";
+import Packaging from "./pages/Packaging";
 
 const now = new Date();
 const nowDate = now.toLocaleDateString("en-GB");
