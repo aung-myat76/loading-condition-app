@@ -6,9 +6,9 @@ import cn from "./lib/cn";
 import ConfirmModal from "./components/ConfirmModal";
 import { supabase } from "./superbaseClient";
 import Packaging from "./pages/Packaging";
-
-const now = new Date();
-const nowDate = now.toLocaleDateString("en-GB");
+import MainLayout from "./layout/MainLayout";
+import { Route, Routes } from "react-router-dom";
+import Loading from "./pages/Loading";
 
 // const getShift = () => {
 //     const time = now.getHours();
@@ -22,12 +22,13 @@ const nowDate = now.toLocaleDateString("en-GB");
 
 const App = () => {
     const [trucks, setTrucks] = useState([]);
+    const [lines, setLines] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [state, setState] = useState("All");
-    const [isOpen, setIsOpen] = useState(false);
 
-    const onOpen = () => setIsOpen(true);
-    const onClose = () => setIsOpen(false);
+    // const [isOpen, setIsOpen] = useState(false);
+
+    // const onOpen = () => setIsOpen(true);
+    // const onClose = () => setIsOpen(false);
 
     const updateCondition = useCallback(async (id, newState) => {
         setTrucks((preTrucks) => {
@@ -48,6 +49,20 @@ const App = () => {
         return await supabase.from("trucks").update(newState).eq("id", id);
     }, []);
 
+    const updateLine = useCallback(async (id, newState) => {
+        setLines((preLines) => {
+            const updatedLine = [...preLines];
+            const updateLineIndex = updatedLine.findIndex((l) => l.id === id);
+            updatedLine[updateLineIndex].item = newState.item;
+            updatedLine[updateLineIndex].status = newState.status;
+            updatedLine[updateLineIndex].remark = newState.remark;
+
+            return updatedLine;
+        });
+        // return await databases.updateDocument(dbId, collectionId, id, newState);
+        return await supabase.from("packaging").update(newState).eq("id", id);
+    }, []);
+
     const getLastUpdatedTime = () => {
         const times = trucks.map((t) => new Date(t.updated_at).getTime());
         const lastTime = Math.max(...times);
@@ -64,15 +79,76 @@ const App = () => {
         return dateString;
     };
 
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         // const data = await databases.listDocuments(dbId, collectionId);
+    //         const { data } = await supabase
+    //             .from("trucks")
+    //             .select("*")
+    //             .order("id", { ascending: true });
+    //         // console.log(data);
+    //         setTrucks(data);
+    //         // setFilterTrucks(data.documents);
+    //     };
+    //     getData();
+
+    //     // const unsubscribe = client.subscribe(
+    //     //     `databases.${dbId}.collections.${collectionId}.documents`,
+    //     //     (response) => {
+    //     //         if (
+    //     //             response.events.includes(
+    //     //                 "databases.*.collections.*.documents.*.update"
+    //     //             )
+    //     //         ) {
+    //     //             setTrucks((prev) =>
+    //     //                 prev.map((t) =>
+    //     //                     t.$id === response.payload.$id
+    //     //                         ? response.payload
+    //     //                         : t
+    //     //                 )
+    //     //             );
+    //     //         }
+    //     //     }
+    //     // );
+    //     const unsubscribe = supabase
+    //         .channel("loading-channel")
+    //         .on(
+    //             "postgres_changes",
+    //             {
+    //                 event: "*",
+    //                 schema: "public",
+    //                 table: "trucks"
+    //             },
+    //             (payload) => {
+    //                 if (payload.eventType === "UPDATE") {
+    //                     setTrucks((currentTrucks) =>
+    //                         currentTrucks.map((t) =>
+    //                             t.id === payload.new.id ? payload.new : t
+    //                         )
+    //                     );
+    //                 }
+    //             }
+    //         )
+    //         .subscribe();
+
+    //     return () => supabase.removeChannel(unsubscribe);
+    // }, []);
     useEffect(() => {
         const getData = async () => {
             // const data = await databases.listDocuments(dbId, collectionId);
-            const { data } = await supabase
-                .from("trucks")
-                .select("*")
-                .order("id", { ascending: true });
-            // console.log(data);
-            setTrucks(data);
+
+            const [truckRes, PackagingRes] = await Promise.all([
+                supabase
+                    .from("trucks")
+                    .select("*")
+                    .order("id", { ascending: true }),
+                supabase
+                    .from("packaging")
+                    .select("*")
+                    .order("id", { ascending: true })
+            ]);
+            if (truckRes.data) setTrucks(truckRes.data);
+            if (PackagingRes.data) setLines(PackagingRes.data);
             // setFilterTrucks(data.documents);
         };
         getData();
@@ -96,7 +172,7 @@ const App = () => {
         //     }
         // );
         const unsubscribe = supabase
-            .channel("loading-channel")
+            .channel("all-channel")
             .on(
                 "postgres_changes",
                 {
@@ -109,6 +185,19 @@ const App = () => {
                         setTrucks((currentTrucks) =>
                             currentTrucks.map((t) =>
                                 t.id === payload.new.id ? payload.new : t
+                            )
+                        );
+                    }
+                }
+            )
+            .on(
+                "postgres_changes",
+                { event: "*", schema: "public", table: "packaging" },
+                (payload) => {
+                    if (payload.eventType === "UPDATE") {
+                        setLines((current) =>
+                            current.map((p) =>
+                                p.id === payload.new.id ? payload.new : p
                             )
                         );
                     }
@@ -152,175 +241,35 @@ const App = () => {
         setLoading(false);
     };
 
-    const stateChangeCls = cn("p-2 rounded-md text-[10px] font-bold");
-
     return (
-        <>
-            <ConfirmModal isOpen={isOpen} onClose={onClose} cb={handleReset} />
-            <div>
-                <header className="flex items-center justify-between py-3 px-1 bg-emerald-800 text-white mb-5">
-                    <h1 className="text-md font-bold">
-                        CWH ( YARD Management System )
-                    </h1>
-
-                    <div>
-                        <button
-                            onClick={onOpen}
-                            className="bg-red-600 p-2 rounded-md text-white">
-                            Reset
-                        </button>
-                    </div>
-                </header>
-                <div className="flex gap-2 items-center justify-around">
-                    {/* <p className=" font-bold mx-3">{getShift()}</p> */}
-                    <p className=" font-bold">{nowDate}</p>
-                    <p className="">
-                        last updated at -{" "}
-                        <span className="font-bold">
-                            {getLastUpdatedTime()}
-                        </span>
-                    </p>
-                    {/* <div className="flex flex-col justify-center items-center text-center bg-red-200 p-2 rounded-md">
-                        <h2 className="font-bold">Warning</h2>
-                        <p>
-                            Please don't use the app now. <br />
-                            we're currently upgrading our app.
-                        </p>
-                    </div> */}
-                </div>
-                <ul className="flex gap-1 justify-center my-3 text-white ">
-                    <li>
-                        <button
-                            onClick={() => setState("All")}
-                            className={
-                                stateChangeCls +
-                                " " +
-                                (state === "All"
-                                    ? "bg-blue-600 "
-                                    : "bg-blue-600/50")
-                            }>
-                            Total Loading [{trucks.length}]
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => setState("Free")}
-                            className={
-                                stateChangeCls +
-                                " " +
-                                (state === "Free"
-                                    ? "bg-emerald-600 "
-                                    : "bg-emerald-600/50")
-                            }>
-                            Free Loading [
-                            {trucks.filter((t) => t.condition == "Free").length}
-                            ]
-                        </button>
-                    </li>
-                    {/* <li>
-                        <button
-                            onClick={() => setState("Almost")}
-                            className={
-                                stateChangeCls +
-                                " " +
-                                (state === "Almost"
-                                    ? "bg-yellow-600 "
-                                    : "bg-yellow-600/50")
-                            }>
-                            Almost [
-                            {
-                                trucks.filter((t) => t.condition == "Almost")
-                                    .length
-                            }
-                            ]
-                        </button>
-                    </li> */}
-                    <li>
-                        <button
-                            onClick={() => setState("Start")}
-                            className={
-                                stateChangeCls +
-                                " " +
-                                (state === "Start"
-                                    ? "bg-yellow-300 "
-                                    : "bg-yellow-300/50")
-                            }>
-                            Start Loading [
-                            {
-                                trucks.filter((t) => t.condition == "Start")
-                                    .length
-                            }
-                            ]
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => setState("Half")}
-                            className={
-                                stateChangeCls +
-                                " " +
-                                (state === "Half"
-                                    ? "bg-orange-400 "
-                                    : "bg-orange-400/50")
-                            }>
-                            Half Loaded [
-                            {trucks.filter((t) => t.condition == "Half").length}
-                            ]
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => setState("Loaded")}
-                            className={
-                                stateChangeCls +
-                                " " +
-                                (state === "Loaded"
-                                    ? "bg-red-800 "
-                                    : "bg-red-800/50")
-                            }>
-                            Fully Loaded [
-                            {
-                                trucks.filter((t) => t.condition == "Loaded")
-                                    .length
-                            }
-                            ]
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => setState("Blocked")}
-                            className={
-                                stateChangeCls +
-                                " " +
-                                (state === "Blocked"
-                                    ? "bg-stone-600 "
-                                    : "bg-stone-600/50")
-                            }>
-                            Blocked Loading [
-                            {
-                                trucks.filter((t) => t.condition == "Blocked")
-                                    .length
-                            }
-                            ]
-                        </button>
-                    </li>
-                </ul>
-
-                {loading && (
-                    <p className="text-xl text-center my-10 font-bold">
-                        Loading...
-                    </p>
-                )}
-                {!loading && trucks.length > 0 && (
-                    <TruckList
-                        trucks={trucks}
-                        state={state}
-                        updateCondition={updateCondition}
+        <Routes>
+            <Route
+                path="/"
+                element={
+                    <MainLayout
+                        handleReset={handleReset}
+                        getLastUpdatedTime={getLastUpdatedTime}
                     />
-                )}
-            </div>
-            {trucks.length > 0 && <Packaging />}
-        </>
+                }>
+                <Route
+                    index
+                    element={
+                        <Loading
+                            trucks={trucks}
+                            loading={loading}
+                            updateCondition={updateCondition}
+                        />
+                    }
+                />
+                <Route
+                    path="/packaging"
+                    element={
+                        <Packaging lines={lines} updateLine={updateLine} />
+                    }
+                />
+                {/* {trucks.length > 0 && <Packaging />} */}
+            </Route>
+        </Routes>
     );
 };
 
