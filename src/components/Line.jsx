@@ -24,9 +24,8 @@ const Line = ({ id, name, item, status, remark, updateLine }) => {
                     item: null,
                     remark: null
                 });
-            } else {
-                await updateLine(id, { status: state });
             }
+            await updateLine(id, { status: state });
         }
     };
     console.log(item);
