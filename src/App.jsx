@@ -272,16 +272,7 @@ const App = () => {
                         <Packaging lines={lines} updateLine={updateLine} />
                     }
                 />
-                <Route
-                    path="*"
-                    element={
-                        <Loading
-                            trucks={trucks}
-                            loading={loading}
-                            updateCondition={updateCondition}
-                        />
-                    }
-                />
+                <Route path="*" element={<Navigate to={"/"} />} />
                 {/* {trucks.length > 0 && <Packaging />} */}
             </Route>
         </Routes>
