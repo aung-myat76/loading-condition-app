@@ -16,15 +16,17 @@ const Truck = ({
 
     const handleUpdateState = async (state) => {
         if (state) {
-            if (state === "Free" || state === "Blocked") {
+            if (state.condition === "Free" || state.condition === "Blocked") {
                 await updateCondition(id, {
                     truck_no: null,
                     type: null,
                     wh_or_sale: null,
-                    distributor: null
+                    distributor: null,
+                    condition: state.condition
                 });
+            } else {
+                await updateCondition(id, state);
             }
-            await updateCondition(id, { condition: state });
         }
     };
 

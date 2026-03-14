@@ -9,7 +9,11 @@ const PackagingModal = ({ id, name, item, remark, isOpen, onClose, cb }) => {
     if (!isOpen) return null;
 
     const handleSelect = async (state) => {
-        await cb(state);
+        await cb({
+            status: state,
+            item: itemRef.current.value || null,
+            remark: remarkRef.current.value || null
+        });
         onClose();
     };
 

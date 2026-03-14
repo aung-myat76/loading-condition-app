@@ -19,13 +19,18 @@ const Line = ({ id, name, item, status, remark, updateLine }) => {
 
     const handleUpdateState = async (state) => {
         if (state) {
-            if (state === "No Production" || state === "Unknown") {
+            if (
+                state.status === "No Production" ||
+                state.status === "Unknown"
+            ) {
                 await updateLine(id, {
                     item: null,
-                    remark: null
+                    remark: null,
+                    status: state.status
                 });
+            } else {
+                await updateLine(id, state);
             }
-            await updateLine(id, { status: state });
         }
     };
     console.log(item);

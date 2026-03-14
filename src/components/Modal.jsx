@@ -21,7 +21,13 @@ const Modal = ({
     if (!isOpen) return null;
 
     const handleSelect = async (state) => {
-        await cb(state);
+        await cb({
+            condition: state,
+            truck_no: truckRef.current.value || null,
+            type: typeRef.current.value || null,
+            wh_or_sale: whOrSaleRef.current.value || null,
+            distributor: distributorRef.current.value || null
+        });
         onClose();
     };
 
