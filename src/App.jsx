@@ -7,7 +7,7 @@ import ConfirmModal from "./components/ConfirmModal";
 import { supabase } from "./superbaseClient";
 import Packaging from "./pages/Packaging";
 import MainLayout from "./layout/MainLayout";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Loading from "./pages/Loading";
 
 // const getShift = () => {
@@ -272,6 +272,7 @@ const App = () => {
                         <Packaging lines={lines} updateLine={updateLine} />
                     }
                 />
+                <Route path="*" element={<Navigate to={"/"} />} />
                 {/* {trucks.length > 0 && <Packaging />} */}
             </Route>
         </Routes>
