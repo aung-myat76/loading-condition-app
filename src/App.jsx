@@ -64,8 +64,9 @@ const App = () => {
     }, []);
 
     const getLastUpdatedTime = () => {
-        const times = trucks.map((t) => new Date(t.updated_at).getTime());
-        const lastTime = Math.max(...times);
+        const TTimes = trucks.map((t) => new Date(t.updated_at).getTime());
+        const LTimes = lines.map((l) => new Date(l.updated_at).getTime());
+        const lastTime = Math.max(...TTimes, ...LTimes);
 
         const date = new Date(lastTime);
         console.log(date, lastTime);
