@@ -29,9 +29,7 @@ const Loading = ({ trucks, loading, updateCondition }) => {
                         className={
                             stateChangeCls +
                             " " +
-                            (state === "Free"
-                                ? "bg-emerald-600 "
-                                : "bg-emerald-600/50")
+                            (state === "Free" ? "free " : "free-not-active")
                         }>
                         Free Loading [
                         {trucks.filter((t) => t.condition == "Free").length}]
@@ -43,9 +41,7 @@ const Loading = ({ trucks, loading, updateCondition }) => {
                         className={
                             stateChangeCls +
                             " " +
-                            (state === "Start"
-                                ? "bg-yellow-300 "
-                                : "bg-yellow-300/50")
+                            (state === "Start" ? "start" : "start-not-active")
                         }>
                         Start Loading [
                         {trucks.filter((t) => t.condition == "Start").length}]
@@ -57,9 +53,7 @@ const Loading = ({ trucks, loading, updateCondition }) => {
                         className={
                             stateChangeCls +
                             " " +
-                            (state === "Half"
-                                ? "bg-orange-400 "
-                                : "bg-orange-400/50")
+                            (state === "Half" ? "half " : "half-not-active")
                         }>
                         Half Loaded [
                         {trucks.filter((t) => t.condition == "Half").length}]
@@ -72,8 +66,8 @@ const Loading = ({ trucks, loading, updateCondition }) => {
                             stateChangeCls +
                             " " +
                             (state === "Loaded"
-                                ? "bg-red-800 "
-                                : "bg-red-800/50")
+                                ? "loaded"
+                                : "loaded-not-active")
                         }>
                         Fully Loaded [
                         {trucks.filter((t) => t.condition == "Loaded").length}]
@@ -86,8 +80,8 @@ const Loading = ({ trucks, loading, updateCondition }) => {
                             stateChangeCls +
                             " " +
                             (state === "Blocked"
-                                ? "bg-stone-600 "
-                                : "bg-stone-600/50")
+                                ? "blocked "
+                                : "blocked-not-active")
                         }>
                         Blocked Loading [
                         {trucks.filter((t) => t.condition == "Blocked").length}]

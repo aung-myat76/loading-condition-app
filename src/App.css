@@ -12,3 +12,43 @@
 .text-Blocked {
     @apply text-stone-600;
 }
+
+.free {
+    @apply bg-emerald-600 text-white;
+}
+
+.free-not-active {
+    @apply bg-emerald-600/50 text-white;
+}
+
+.start {
+    @apply bg-yellow-400 text-stone-900;
+}
+
+.start-not-active {
+    @apply bg-yellow-400/50 text-stone-100;
+}
+
+.half {
+    @apply bg-orange-600 text-white;
+}
+
+.half-not-active {
+    @apply bg-orange-600/50 text-white;
+}
+
+.loaded {
+    @apply bg-red-600 text-white;
+}
+
+.loaded-not-active {
+    @apply bg-red-600/50 text-white;
+}
+
+.blocked {
+    @apply bg-stone-600 text-white;
+}
+
+.blocked-not-active {
+    @apply bg-stone-600/50 text-white;
+}

@@ -35,18 +35,18 @@ const Truck = ({
     };
 
     const liCls = cn(
-        "flex flex-col   px-1 text-white rounded-md w-27 min-h-23 cursor-pointer",
+        "flex flex-col   px-1 rounded-md w-27 min-h-23 cursor-pointer",
         condition === "Free"
-            ? "bg-emerald-600"
+            ? "free"
             : condition === "Start"
-              ? "bg-yellow-300"
+              ? "start"
               : condition === "Half"
-                ? "bg-orange-400"
+                ? "half"
                 : condition === "Loaded"
-                  ? "bg-red-800"
+                  ? "loaded"
                   : condition === "Blocked"
-                    ? "bg-stone-600"
-                    : "bg-red-600"
+                    ? "blocked"
+                    : ""
     );
 
     return (
@@ -63,8 +63,8 @@ const Truck = ({
             />
             <li className={liCls} onClick={onOpen}>
                 <h2 className="text-xl font-bold">{loadingBay}</h2>
-                <div className="flex flex-col text-stone-900  font-bold items-center justify-center ">
-                    <p className=" my-1  flex text-[12px]   items-center justify-center">
+                <div className="flex flex-col   font-bold items-center justify-center ">
+                    <p className=" my-1  flex text-[10px]   items-center justify-center">
                         <span className="">
                             {truckNo ? String(truckNo).toUpperCase() : "-"}
                         </span>

@@ -10,7 +10,7 @@ const TruckList = ({ trucks, state, updateCondition }) => {
                 <p className=" text-xl my-5">
                     There is no{" "}
                     <span className="font-bold">{state.toLowerCase()}</span>{" "}
-                    truck yet!
+                    state yet!
                 </p>
             )}
             {filterTrucks.length > 0 &&
