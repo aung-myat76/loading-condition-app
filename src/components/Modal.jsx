@@ -8,6 +8,7 @@ const Modal = ({
     truckNo,
     type,
     distributor,
+    wh_or_sale,
     loadingBay,
     isOpen,
     onClose,
@@ -16,6 +17,7 @@ const Modal = ({
     const truckRef = useRef(null);
     const typeRef = useRef(null);
     const distributorRef = useRef(null);
+    const whOrSaleRef = useRef(null);
     if (!isOpen) return null;
 
     const handleSelect = async (state) => {
@@ -32,6 +34,7 @@ const Modal = ({
             .update({
                 truck_no: truckRef.current.value || null,
                 type: typeRef.current.value || null,
+                wh_or_sale: whOrSaleRef.current.value || null,
                 distributor: distributorRef.current.value || null
             })
             .eq("id", id);
@@ -84,28 +87,43 @@ const Modal = ({
                             </select>
                         </div>
                         {/* <div className="mt-2 flex gap-7"> */}
-                        <select
-                            name="distributors"
-                            ref={distributorRef}
-                            defaultValue={distributor}
-                            placeholder={
-                                !distributor ? "Distributor" : distributor
-                            }
-                            className=" w-full text-center my-1 p-1 text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
-                            <option value={""}>Distributor</option>
-                            <option value={"MBL"}>MBL</option>
-                            <option value={"Nehru"}>Nehru</option>
-                            <option value={"TPN"}>TPN</option>
-                            <option value={"STC"}>STC</option>
-                            <option value={"KG"}>KG</option>
-                            <option value={"KKA"}>KKA</option>
-                            <option value={"BDL"}>BDL</option>
-                            <option value={"YCO"}>YCO</option>
-                            <option value={"K-Kan"}>K-Kan</option>
-                            <option value={"NMMK"}>NMMK</option>
-                            <option value={"N-Star"}>N-Star</option>
-                            <option value={"T-Party"}>T-Party</option>
-                        </select>
+                        <div className="flex gap-2">
+                            <select
+                                name="distributors"
+                                ref={distributorRef}
+                                defaultValue={distributor}
+                                placeholder={
+                                    !distributor ? "Distributor" : distributor
+                                }
+                                className="w-1/2 p-1 text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
+                                <option value={""}>Distributor</option>
+                                <option value={"MBL"}>MBL</option>
+                                <option value={"Nehru"}>Nehru</option>
+                                <option value={"TPN"}>TPN</option>
+                                <option value={"STC"}>STC</option>
+                                <option value={"KG"}>KG</option>
+                                <option value={"KKA"}>KKA</option>
+                                <option value={"BDL"}>BDL</option>
+                                <option value={"YCO"}>YCO</option>
+                                <option value={"K-Kan"}>K-Kan</option>
+                                <option value={"NMMK"}>NMMK</option>
+                                <option value={"N-Star"}>N-Star</option>
+                                <option value={"T-Party"}>T-Party</option>
+                                <option value={"Other"}>Other</option>
+                            </select>
+                            <select
+                                name="wh_or_sale"
+                                ref={whOrSaleRef}
+                                defaultValue={wh_or_sale}
+                                placeholder={
+                                    !wh_or_sale ? "WH/Sale" : wh_or_sale
+                                }
+                                className="w-1/2 p-1 text-center text-lg font-bold bg-stone-100 text-stone-900 rounded-sm focus:outline-none">
+                                <option value={""}>WH/Sale</option>
+                                <option value={"WH-WH"}>WH-WH</option>
+                                <option value={"Sale"}>Sale</option>
+                            </select>
+                        </div>
                         <button
                             className="p-2 font-bold bg-blue-600  rounded-sm"
                             onClick={handleUpdateTruck}>

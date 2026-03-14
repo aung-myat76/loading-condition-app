@@ -7,6 +7,7 @@ const Truck = ({
     loadingBay,
     truckNo,
     type,
+    wh_or_sale,
     distributor,
     condition,
     updateCondition
@@ -19,6 +20,7 @@ const Truck = ({
                 await updateCondition(id, {
                     truck_no: null,
                     type: null,
+                    wh_or_sale: null,
                     distributor: null
                 });
             }
@@ -59,18 +61,22 @@ const Truck = ({
                 cb={handleUpdateState}
                 truckNo={truckNo}
                 type={type}
+                wh_or_sale={wh_or_sale}
                 distributor={distributor}
             />
             <li className={liCls} onClick={onOpen}>
                 <h2 className="text-xl font-bold">{loadingBay}</h2>
                 <div className="flex flex-col   font-bold items-center justify-center ">
-                    <p className=" my-1  flex text-[10px]   items-center justify-center">
-                        <span className="">
+                    <p className=" my-1 bg-stone-600/25 p-1 rounded-sm gap-1 flex text-[11px]   items-center justify-center">
+                        <span className="font-bold">
                             {truckNo ? String(truckNo).toUpperCase() : "-"}
                         </span>
-                        {type && <span className="ml-1">{`- ${type}W`}</span>}
+                        {type && <span className="">{`(${type}W)`}</span>}
                     </p>
-                    <div>{distributor}</div>
+                    <div className="flex gap-1 text-[10px]">
+                        <span>{distributor}</span>
+                        {wh_or_sale && <span>({wh_or_sale})</span>}
+                    </div>
                 </div>
             </li>
         </>

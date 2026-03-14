@@ -40,6 +40,8 @@ const App = () => {
             updatedTrucks[updateTruckIndex].condition = newState.condition;
             updatedTrucks[updateTruckIndex]["truck_no"] = newState["truck_no"];
             updatedTrucks[updateTruckIndex]["type"] = newState["type"];
+            updatedTrucks[updateTruckIndex]["wh_or_sale"] =
+                newState["wh_or_sale"];
             updatedTrucks[updateTruckIndex]["distributor"] =
                 newState["distributor"];
 
@@ -223,6 +225,7 @@ const App = () => {
             .update({
                 condition: "Free",
                 truck_no: null,
+                wh_or_sale: null,
                 type: null,
                 distributor: null
             })
@@ -234,6 +237,7 @@ const App = () => {
                 (t.condition = "Free"),
                     (t.truck_no = "-"),
                     (t.type = null),
+                    (t.wh_or_sale = null),
                     (t.distributor = null);
             });
             console.log(updatedTrucks);
