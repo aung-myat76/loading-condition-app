@@ -14,7 +14,7 @@
 }
 
 .free {
-    @apply bg-orange-400 text-white;
+    @apply bg-emerald-600 text-white;
 }
 
 .free-not-active {
