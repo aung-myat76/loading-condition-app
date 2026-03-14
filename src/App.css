@@ -14,7 +14,7 @@
 }
 
 .free {
-    @apply bg-emerald-600 text-white;
+    @apply bg-orange-400 text-white;
 }
 
 .free-not-active {
@@ -22,19 +22,19 @@
 }
 
 .start {
-    @apply bg-yellow-400 text-stone-900;
+    @apply bg-yellow-300 text-stone-900;
 }
 
 .start-not-active {
-    @apply bg-yellow-400/50 text-stone-100;
+    @apply bg-yellow-300/50 text-stone-100;
 }
 
 .half {
-    @apply bg-orange-600 text-white;
+    @apply bg-orange-400 text-white;
 }
 
 .half-not-active {
-    @apply bg-orange-600/50 text-white;
+    @apply bg-orange-400/50 text-white;
 }
 
 .loaded {
