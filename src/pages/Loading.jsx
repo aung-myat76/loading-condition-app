@@ -20,7 +20,7 @@ const Loading = ({ trucks, loading, updateCondition }) => {
                                 ? "bg-blue-600 "
                                 : "bg-blue-600/50")
                         }>
-                        Total Loading [{trucks.length}]
+                        Total Loading Bay [{trucks.length}]
                     </button>
                 </li>
                 <li>
@@ -31,7 +31,7 @@ const Loading = ({ trucks, loading, updateCondition }) => {
                             " " +
                             (state === "Free" ? "free " : "free-not-active")
                         }>
-                        Free Loading [
+                        Free Spaces [
                         {trucks.filter((t) => t.condition == "Free").length}]
                     </button>
                 </li>
@@ -43,7 +43,7 @@ const Loading = ({ trucks, loading, updateCondition }) => {
                             " " +
                             (state === "Start" ? "start" : "start-not-active")
                         }>
-                        Start Loading [
+                        Loading Started [
                         {trucks.filter((t) => t.condition == "Start").length}]
                     </button>
                 </li>
