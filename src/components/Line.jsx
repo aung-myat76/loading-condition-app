@@ -9,7 +9,7 @@ const Line = ({ id, name, item, status, remark, updateLine }) => {
     const onOpen = () => setIsOpen(true);
 
     const liCls = cn(
-        "flex flex-col   p-2 text-white rounded-md w-40 min-h-35 cursor-pointer",
+        "flex flex-col   p-2 text-white rounded-md w-40 min-h-35 md:w-45 cursor-pointer",
         status === "Running"
             ? "bg-emerald-600"
             : status === "No Production"
@@ -49,7 +49,12 @@ const Line = ({ id, name, item, status, remark, updateLine }) => {
                 <h2 className="text-xl font-bold">{name}</h2>
                 <div className="flex flex-col text-[10px] text-white  font-bold  ">
                     <p className=" my-1  flex    ">
-                        <span className="">Item - {!item ? "" : item}</span>
+                        <span className="">
+                            Item -{" "}
+                            <span className="md:text-[.75rem] ">
+                                {!item ? "" : item}
+                            </span>
+                        </span>
                     </p>
                     <div>Status - {!status ? "Unknown" : status}</div>
                     <div>{remark}</div>
